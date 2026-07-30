@@ -1,0 +1,126 @@
+.categoryMenu {
+  width: min(1800px, calc(100% - 40px));
+  // ㅇ여기와 아래 항복의 간격 사이를 조절 마진
+  margin: 14rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.categoryList{
+  // width: 1800px;
+  display: flex;
+  gap: 30px;
+}
+.categoryList a > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.categoryList strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 19px;
+}
+.categoryList span {
+  display: flex;
+  width: 180px;
+  height: 180px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgb(150, 150, 150);
+  font-size: 2.3rem;
+  font-weight: 700;
+}
+.titleArea{
+  text-align: center;
+}
+.titleArea p{
+  font-size: 80px;
+}
+.titleArea h2{
+  font-size: 20px;
+  padding-bottom: 40px;
+}
+.categoryList img{
+  width: 180px;
+  height: 180px;
+  transition: all 0.4s;
+   &:hover{
+    transform: rotate(45deg);
+  }
+  border-radius: 50%;
+}
+
+.revealUp,
+.revealFromRight {
+  opacity: 0;
+}
+
+.revealUp {
+  transform: translateY(5rem);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.revealFromRight {
+  transform: translateX(12rem);
+  transition: opacity 2.3s ease, transform 2.3s ease;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealUp,
+  .revealFromRight {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+// 태블릿: 카테고리 원형 버튼이 눌리지 않도록 4열 그리드로 전환합니다.
+@media (max-width: 1100px) {
+  .categoryMenu {
+    margin: 7rem auto;
+  }
+
+  .categoryList {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .categoryList span,
+  .categoryList img {
+    width: clamp(6rem, 15vw, 9rem);
+    height: clamp(6rem, 15vw, 9rem);
+  }
+
+  .titleArea p {
+    font-size: clamp(3.5rem, 9vw, 5rem);
+  }
+}
+
+// 모바일: 카테고리를 2열로 내려 한 항목의 터치 영역을 확보합니다.
+@media (max-width: 600px) {
+  .categoryMenu {
+    width: calc(100% - 2rem);
+    margin: 4rem auto;
+  }
+
+  .categoryList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1rem;
+  }
+
+  .categoryList strong {
+    font-size: 0.9rem;
+  }
+
+  .titleArea h2 {
+    font-size: 1rem;
+  }
+}

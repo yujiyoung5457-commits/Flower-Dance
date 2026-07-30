@@ -1,0 +1,13 @@
+.page {
+  width: min(1200px, calc(100% - 32px));
+  min-height: 60vh;
+  margin: 0 auto;
+  padding: 5rem 0;
+  color: #55483e;
+}
+.eyebrow { color: #a88d76; font-weight: 700; }
+.page h1 { margin: .5rem 0; padding-bottom: 1.5rem; border-bottom: 1px solid #d9ccc2; font-size: clamp(2.3rem, 5vw, 4rem); }
+.page time { color: #8b7a6f; }
+.page article { min-height: 15rem; margin: 2rem 0; padding: 2rem; border-radius: 1rem; background: #fbf8f4; line-height: 1.8; white-space: pre-wrap; }
+.back { display: inline-block; padding: .7rem 1rem; border-radius: .6rem; background: #baa088; color: #fff; text-decoration: none; }
+@media (max-width: 560px) { .page { padding: 3rem 0; } .page article { padding: 1.2rem; } }

@@ -1,0 +1,75 @@
+[[
+  {
+    "id": 1,
+    "name": "파이어 기계식 키보드",
+    "category": "키보드",
+    "categoryValue": "keyboard",
+    "price": 129000,
+    "discountRate": 15,
+    "image": "/img/01.png"
+  },
+  {
+    "id": 2,
+    "name": "파이어 미니 키보드",
+    "category": "키보드",
+    "categoryValue": "keyboard",
+    "price": 89000,
+    "discountRate": 12,
+    "image": "/img/01.png"
+  },
+  {
+    "id": 3,
+    "name": "파이어 무선 마우스",
+    "category": "마우스",
+    "categoryValue": "mouse",
+    "price": 69000,
+    "discountRate": 10,
+    "image": "/img/01.png"
+  },
+  {
+    "id": 4,
+    "name": "파이어 게이밍 마우스",
+    "category": "마우스",
+    "categoryValue": "mouse",
+    "price": 99000,
+    "discountRate": 5,
+    "image": "/img/01.png"
+  },
+  {
+    "id": 5,
+    "name": "파이어 와이드 모니터",
+    "category": "모니터",
+    "categoryValue": "monitor",
+    "price": 399000,
+    "discountRate": 20,
+    "image": "/img/01.png"
+  },
+  {
+    "id": 6,
+    "name": "파이어 슬림 노트북",
+    "category": "노트북",
+    "categoryValue": "laptop",
+    "price": 1290000,
+    "discountRate": 8,
+    "image": "/img/01.png"
+  },
+  {
+    "id": 7,
+    "name": "파이어 데스크 스피커",
+    "category": "스피커",
+    "categoryValue": "speaker",
+    "price": 159000,
+    "discountRate": 15,
+    "image": "/img/01.png"
+  },
+  {
+    "id": 8,
+    "name": "파이어 데스크 액세서리 세트",
+    "category": "액세서리",
+    "categoryValue": "accessory",
+    "price": 79000,
+    "discountRate": 0,
+    "image": "/img/01.png"
+  }
+]
+]

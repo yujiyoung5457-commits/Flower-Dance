@@ -1,0 +1,89 @@
+.section {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 4rem 0 6rem;
+}
+
+.titleArea {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.cart {
+  margin: 0 0 0.75rem;
+  font-size: 4rem;
+}
+
+.cartContent {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(3rem, 7vw, 8rem);
+}
+
+.maintxt {
+  flex: 1 1 65%;
+  min-width: 0;
+}
+
+.maintxt > div:first-child {
+  margin-bottom: 1.5rem;
+}
+
+.maintxt > div:first-child button {
+  margin-top: 0.75rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+// 鍮꾨줈洹몄씤 ?ъ슜?먯쓽 鍮?移댄듃 ?곸뿭??3D 肄뷀떚瑜?媛?대뜲?뺤뿉 ?쒖떆?⑸땲??
+.emptyCartModel {
+  display: grid;
+  justify-items: center;
+  min-height: 28rem;
+  padding: 2rem 1rem 4rem;
+  text-align: center;
+
+  model-viewer {
+    width: min(24rem, 100%);
+    height: 21rem;
+  }
+
+  h3 {
+    margin: 0.5rem 0 0;
+    color: #55483e;
+    font-size: 2rem;
+  }
+
+  p {
+    margin: 0.7rem 0 0;
+    color: #7d7168;
+    font-size: 1.1rem;
+  }
+}
+
+// 태블릿 이하: 장바구니 본문과 주문 요약을 세로 배치합니다.
+@media (max-width: 800px) {
+  .cartContent {
+    flex-direction: column;
+  }
+
+  .maintxt {
+    width: 100%;
+  }
+}
+
+@media (max-width: 370px) {
+  .section {
+    width: calc(100% - 2rem);
+    padding: 2.5rem 0 4rem;
+  }
+
+  .titleArea {
+    margin-bottom: 2.5rem;
+  }
+
+  .cart {
+    font-size: 3rem;
+  }
+}

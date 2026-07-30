@@ -1,0 +1,100 @@
+.page {
+  width: min(1200px, calc(100% - 32px));
+  min-height: 65vh;
+  margin: 0 auto;
+  padding: 5rem 0 7rem;
+}
+
+.adminLayout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: 1.25rem; }
+.sidebar { display: grid; align-content: start; gap: 0.4rem; padding: 1.5rem; border: 1px solid #e4dcd5; border-radius: 1.5rem; background: #fff; }
+.sidebar > p { margin: 0 0 0.7rem; color: #a68d78; font-size: 0.9rem; font-weight: 700; }
+.sidebar button { padding: 0.8rem; border: 0; border-radius: 0.65rem; background: transparent; color: #66574d; font: inherit; text-align: left; cursor: pointer; }
+.sidebar .active { background: #eadfd5; color: #55483e; font-weight: 700; }
+.sidebar a { padding: .8rem; border-radius: .65rem; color: #66574d; text-align: left; text-decoration: none; }
+
+.hero {
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  background: #eae2d8;
+  color: #55483e;
+
+  p {
+    margin: 0 0 0.5rem;
+    color: #9c846f;
+    font-weight: 700;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  span {
+    display: block;
+    margin-top: 1rem;
+    color: #766b62;
+  }
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+
+  article {
+    display: flex;
+    min-height: 15rem;
+    padding: 2rem;
+    flex-direction: column;
+    border: 1px solid #e4dcd5;
+    border-radius: 1.5rem;
+    background: #fff;
+  }
+
+  p {
+    margin: 0;
+    color: #a68d78;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    margin: 0.5rem 0;
+    color: #55483e;
+    font-size: 2rem;
+  }
+
+  span {
+    color: #7d7168;
+    line-height: 1.6;
+  }
+
+  a {
+    width: fit-content;
+    margin-top: auto;
+    padding: 0.55rem 0.85rem;
+    border-radius: 0.6rem;
+    background: #baa088;
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .page {
+    width: calc(100% - 2rem);
+    padding: 3rem 0 4rem;
+  }
+
+  .hero,
+  .menu article {
+    padding: 1.5rem;
+  }
+
+  .menu {
+    grid-template-columns: 1fr;
+  }
+
+  .adminLayout { grid-template-columns: 1fr; }
+}

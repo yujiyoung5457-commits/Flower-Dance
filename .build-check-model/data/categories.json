@@ -1,0 +1,45 @@
+[[
+  {
+    "id": 1,
+    "name": "전체",
+    "path": "/products",
+    "image": null
+  },
+  {
+    "id": 2,
+    "name": "침구류",
+    "path": "/products/category/keyboard",
+    "image": "/img/pd-01.png"
+  },
+  {
+    "id": 3,
+    "name": "침구류",
+    "path": "/products/category/mouse",
+    "image": "/img/pd-02.png"
+  },
+  {
+    "id": 4,
+    "name": "침구류",
+    "path": "/products/category/monitor",
+    "image": "/img/imgpd-03.png"
+  },
+  {
+    "id": 5,
+    "name": "침구류",
+    "path": "/products/category/laptop",
+    "image": "/img/pd-04.png"
+  },
+  {
+    "id": 6,
+    "name": "침구류",
+    "path": "/products/category/speaker",
+    "image": "/img/pd-05.png"
+  },
+  {
+    "id": 7,
+    "name": "침구류",
+    "path": "/products/category/accessory",
+    "image": "/img/pd-06.png"
+  }
+]
+]

@@ -1,0 +1,69 @@
+.aside {
+  position: sticky;
+  top: 2rem;
+  flex: 0 0 380px;
+  width: 380px;
+  padding: 4rem;
+  border: 1px solid rgb(182, 163, 145);
+  border-radius: 22px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.aside h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.aside div {
+  font-size: 1.15rem;
+}
+
+.aside span,
+.aside strong {
+  border-bottom: 1px solid rgb(139, 126, 110);
+}
+
+// 금액 숫자만 장식 글꼴 대신 가독성이 높은 기본 글꼴을 사용합니다.
+.aside strong {
+  font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+.aside button {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.8rem 1rem;
+  border: 0;
+  border-radius: 25px;
+  background: rgb(139, 126, 110);
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.aside button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+// 태블릿 이하: 주문 요약 영역을 화면 폭에 맞게 재배치합니다.
+@media (max-width: 800px) {
+  .aside {
+    position: static;
+    width: 100%;
+    flex-basis: auto;
+  }
+}
+
+@media (max-width: 370px) {
+  .aside {
+    box-sizing: border-box;
+    padding: 2rem;
+    gap: 1.2rem;
+  }
+}

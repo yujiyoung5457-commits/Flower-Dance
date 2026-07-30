@@ -1,0 +1,384 @@
+.page {
+  min-height: 65vh;
+  padding: 5rem 0 7rem;
+}
+
+.hero {
+  margin-bottom: 2rem;
+  text-align: center;
+
+  .eyebrow {
+    margin: 0 0 0.6rem;
+    color: #9c846f;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  h1 {
+    margin: 0;
+    color: #4d443d;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  > p:last-child {
+    margin: 1rem 0 0;
+    color: #766b62;
+    font-size: 1.2rem;
+  }
+}
+
+.memberInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2rem 2.5rem;
+  border: 1px solid #ded4cb;
+  border-radius: 1.5rem;
+  background: #fbf9f6;
+
+  strong,
+  span {
+    display: block;
+  }
+
+  strong {
+    color: #4d443d;
+    font-size: 2rem;
+  }
+
+  > div > span {
+    margin-top: 0.4rem;
+    color: #81756b;
+  }
+}
+
+.joinedDate {
+  margin-top: 0.7rem;
+  color: #9b8d82;
+  font-size: 0.95rem;
+}
+
+.statusMessage,
+.errorMessage {
+  margin: 0;
+  color: #766b62;
+}
+
+.errorMessage,
+.formMessage {
+  color: #a15c5c;
+}
+
+.emptyOrders {
+  margin-top: 1rem;
+
+  p {
+    min-height: auto;
+    margin: 0 0 1rem;
+    color: #7d7168;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.55rem 0.85rem;
+    border-radius: 0.6rem;
+    background: #baa088;
+    color: #fff;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+}
+
+.orderList {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.25rem 0.75rem;
+    padding: 0.85rem;
+    border-radius: 0.75rem;
+    background: #fbf9f6;
+  }
+
+  strong {
+    overflow: hidden;
+    color: #55483e;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  span {
+    color: #887a70;
+    font-size: 0.9rem;
+  }
+
+  b {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    color: #8f7057;
+  }
+}
+
+.savedList {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee7e1;
+  }
+
+  span {
+    overflow: hidden;
+    color: #66574d;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  b {
+    flex-shrink: 0;
+    color: #9b8068;
+    font-size: 0.9rem;
+  }
+}
+
+.savedLink {
+  display: inline-block;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.6rem;
+  background: #eadfd5;
+  color: #786656;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+// Firestore ?λ컮援щ땲???곹뭹蹂?媛寃? ?섎웾, 湲덉븸???섏븘蹂닿린 ?쒖떆?⑸땲??
+.cartItemDetails {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+
+  strong {
+    overflow: hidden;
+    color: #55483e;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  span,
+  b {
+    color: #887a70;
+    font-size: 0.86rem;
+  }
+
+  b {
+    color: #8f7057;
+  }
+
+  .cartDeleteButton {
+    width: fit-content;
+    margin-top: 0.3rem;
+    padding: 0.35rem 0.55rem;
+    border: 0;
+    border-radius: 0.45rem;
+    background: #eadfd5;
+    color: #786656;
+    font: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  .cartDeleteButton:disabled {
+    cursor: wait;
+    opacity: 0.65;
+  }
+}
+
+.cartItemDetails + b {
+  display: none;
+}
+
+.wishlistDeleteButton {
+  padding: 0.3rem 0.55rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: #eadfd5;
+  color: #786656;
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.cartTotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 0.9rem 1rem;
+  border-radius: 0.75rem;
+  background: #8f7057;
+  color: #fff;
+  font-weight: 700;
+
+  b {
+    color: #fff;
+    font-size: 1.15rem;
+  }
+}
+
+.label {
+  margin: 0 0 0.45rem;
+  color: #a68d78;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.role,
+.card > span {
+  width: fit-content;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  background: #eadfd5;
+  color: #786656;
+  font-size: 0.95rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.card {
+  min-height: 15rem;
+  padding: 2rem;
+  border: 1px solid #e4dcd5;
+  border-radius: 1.5rem;
+  background: #fff;
+
+  h2 {
+    margin: 0;
+    color: #55483e;
+    font-size: 2rem;
+  }
+
+  > p:not(.label) {
+    min-height: 3.2rem;
+    margin: 1rem 0 1.4rem;
+    color: #7d7168;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+}
+
+.editForm {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1rem;
+
+  label {
+    color: #7d7168;
+    font-size: 0.9rem;
+  }
+
+  > div {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  input {
+    width: 100%;
+    min-width: 0;
+    height: 2.5rem;
+    padding: 0 0.8rem;
+    border: 1px solid #ded4cb;
+    border-radius: 0.6rem;
+    font: inherit;
+  }
+
+  button {
+    flex-shrink: 0;
+    padding: 0 0.9rem;
+    border: 0;
+    border-radius: 0.6rem;
+    background: #baa088;
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+  }
+}
+
+.formMessage {
+  margin: 0.8rem 0 0;
+  font-size: 0.95rem;
+}
+
+// 모바일: 회원 정보와 각 메뉴 카드를 한 줄씩 보여 터치 영역을 유지합니다.
+@media (max-width: 700px) {
+  .page {
+    width: calc(100% - 2rem);
+    padding: 3rem 0 4rem;
+  }
+
+  .hero > p:last-child {
+    font-size: 1rem;
+  }
+
+  .memberInfo {
+    padding: 1.5rem;
+    align-items: flex-start;
+    flex-direction: column;
+
+    strong { font-size: 1.6rem; }
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: auto;
+    padding: 1.5rem;
+
+    h2 { font-size: 1.6rem; }
+    > p:not(.label) { min-height: 0; font-size: 1rem; }
+  }
+
+  .editForm > div {
+    flex-direction: column;
+  }
+
+  .editForm button {
+    height: 2.5rem;
+  }
+
+  .orderList li {
+    grid-template-columns: 1fr;
+  }
+
+  .orderList b {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}

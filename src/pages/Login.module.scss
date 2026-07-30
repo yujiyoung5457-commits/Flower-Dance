@@ -1,0 +1,231 @@
+.page {
+  width: min(1052px, calc(100% - 60px));
+  min-height: 75vh;
+  margin: 0 auto;
+  padding: 6rem 0 7rem;
+  display: grid;
+  grid-template-columns: 426px 426px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3.5rem;
+}
+
+.loginArea {
+  width: 426px;
+}
+
+.loginArea h1 {
+  margin: 0 0 3.5rem;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: #080808;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form input {
+  width: 100%;
+  height: 64px;
+  padding: 0 32px;
+  border: 1px solid #d5cec8;
+  border-radius: 34px;
+  background: #fff;
+  color: #4d443d;
+  font-family: inherit;
+  font-size: 1.3rem;
+}
+
+.form input::placeholder {
+  color: #c6bfba;
+}
+
+.form input:focus {
+  border-color: #9d8875;
+}
+
+.loginButton {
+  width: 100%;
+  height: 64px;
+  border: 0;
+  border-radius: 34px;
+  background: #baa088;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1.85rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.loginButton:hover {
+  background: #9c846f;
+  transform: translateY(-10px);
+}
+
+.loginButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.errorMessage {
+  margin: 0;
+  color: #b63f3f;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.socialButton {
+  display: flex;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.socialButton img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.naver {
+  background: #81c784;
+  color: #fff;
+}
+
+.google {
+  background: #fff;
+}
+
+.facebook {
+  background: #69a9df;
+  color: #fff;
+}
+
+.kakao {
+  background: #ead333;
+  color: #271c12;
+}
+
+.apple {
+  overflow: hidden;
+  border: 1px solid #d4ccc5;
+  background: #fff;
+}
+
+.signupText {
+  margin: 20px 0 0;
+  text-align: center;
+  color: #6f665f;
+  font-size: 1.55rem;
+}
+
+.signupText a {
+  color: inherit;
+}
+
+.signupText a:hover {
+  text-decoration: underline;
+}
+
+.characterArea {
+  align-self: center;
+  width: 426px;
+  text-align: center;
+}
+
+.characterArea span {
+  display: block;
+  margin-bottom: 4px;
+  color: #dedede;
+  font-size: 1.4rem;
+}
+
+.characterArea img {
+  display: block;
+  width: calc(426px + 5rem);
+  height: calc(526px + 5rem);
+  margin-left: -2.5rem;
+  object-fit: contain;
+}
+
+// 태블릿 이하: 캐릭터 영역을 숨기고 로그인 폼 하나에 집중합니다.
+@media (max-width: 1000px) {
+  .page {
+    width: min(450px, calc(100% - 40px));
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 3rem;
+  }
+
+  .loginArea {
+    width: 100%;
+  }
+
+  .characterArea {
+    display: none;
+  }
+}
+
+// 작은 모바일: 370px에서도 입력창과 5개 소셜 버튼이 넘치지 않게 축소합니다.
+@media (max-width: 420px) {
+  .page {
+    width: calc(100% - 2rem);
+    min-height: auto;
+    padding: 3rem 0 4rem;
+  }
+
+  .loginArea h1 {
+    margin-bottom: 2rem;
+    font-size: 3.5rem;
+  }
+
+  .form {
+    gap: 0.7rem;
+  }
+
+  .form input,
+  .loginButton {
+    height: 3.35rem;
+    padding: 0 1.2rem;
+    font-size: 1.25rem;
+  }
+
+  .loginButton {
+    font-size: 1.45rem;
+  }
+
+  .socials {
+    gap: 0.4rem;
+    margin-top: 1.4rem;
+  }
+
+  .socialButton {
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+  }
+
+  .signupText {
+    font-size: 1rem;
+  }
+}

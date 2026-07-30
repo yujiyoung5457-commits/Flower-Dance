@@ -1,0 +1,507 @@
+# 변경 이력
+
+## 2026-07-29
+
+### 인트로 영상
+- 수정: `src/components/IntroVideo.jsx`
+- 수정: `src/components/IntroVideo.module.scss`
+- 이유: 영상 마지막 프레임을 유지한 뒤 6초 동안 페이드아웃하도록 조정했습니다.
+
+### Home 코티 3D 모델
+- 수정: `src/pages/Home.jsx`
+- 수정: `src/pages/Home.module.scss`
+- 수정: `package.json`, `package-lock.json`
+- 추가: `@google/model-viewer` 의존성
+- 이유: Home Section 1의 `imgBox`에 `cotti-3D.glb`를 표시하고, 자동 회전·크기·중립 조명을 적용했습니다.
+- 참고: 실제 털 효과 관련 실험 코드는 제거했고, 현재는 원본 3D 모델을 사용합니다.
+
+### 코티 화면 색보정
+- 수정: `src/pages/Home.jsx`
+- 이유: 밝기, 채도, 색온도, 대비, 섀도우, 하이라이트 값을 모델 화면 보정에 연결했습니다.
+- 참고: Firebase 기능 또는 보안 규칙 변경 없음.
+
+### 전역 자간
+- 수정: `src/styles/global.scss`
+- 이유: 모든 기본 텍스트의 `letter-spacing`을 `0.05rem`으로 넓혔습니다.
+
+## 이후 작업 규칙
+- 수정 전 기존 코드와 영향을 받는 기능을 먼저 확인합니다.
+- 기존 기능과 디자인을 유지하며 필요한 파일만 수정합니다.
+- 파일 수정·추가·생성 시 이 파일에 이유와 대상 파일을 기록합니다.
+- Firebase 기능을 수정·추가·생성할 경우 테스트 가능한 보안 규칙 코드도 함께 기록합니다.
+- 환경 변수의 실제 값은 기록하지 않습니다.
+
+### 1단계 구조 분석
+- 추가: `정리한것.txt`
+- 이유: 코드 수정 없이 현재 폴더 구조, JSON 데이터 위치, 인증 화면, 라우터, Zustand·Firebase 준비 상태 및 향후 작업 순서를 분석해 기록했습니다.
+- 참고: Firebase 기능 또는 보안 규칙 변경 없음.
+
+### 반응형 레이아웃 및 모바일 헤더
+- 수정: `src/components/Header.jsx`, `src/components/Header.module.scss`
+- 수정: `src/components/ProductList.module.scss`, `src/components/ProductCard.module.scss`
+- 수정: `src/components/CategoryMenu.module.scss`, `src/components/MainBanner.module.scss`
+- 수정: `src/components/Footer.module.scss`, `src/components/SearchBox.module.scss`
+- 수정: `src/pages/Home.module.scss`
+- 이유: 데스크톱 레이아웃을 유지하며 화면이 좁아질 때 상품·카테고리 영역을 4열/2열/1열로 전환하고, 모바일에서 3rem 높이 헤더와 햄버거 메뉴를 제공합니다.
+- 참고: Firebase 기능 또는 보안 규칙 변경 없음.
+
+### 2단계 Firebase 기본 설정
+- 수정: `package.json`, `package-lock.json`
+- 수정: `src/firebase/firebase.js`, `src/firebase/index.js`, `.env.example`
+- 이유: Vite 환경변수와 Firebase 모듈 방식으로 App, Authentication, Firestore, Storage의 초기화·공용 export 구조를 구성했습니다. 기존 화면과 상품 JSON 기능은 수정하지 않았습니다.
+- 설치 패키지: `firebase`
+- 설치 이유: Firebase App 초기화와 Auth, Firestore, Storage 모듈을 사용하기 위해 필요합니다.
+- 환경변수: 실제 값은 기록하지 않았으며 `.env.example`에는 변수 이름만 추가했습니다.
+
+#### Firestore 보안 규칙: 기본 차단 규칙
+```rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+```
+
+#### Storage 보안 규칙: 기본 차단 규칙
+```rules
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
+```
+
+- 테스트 기준: Firebase Console의 Rules 탭 또는 Emulator에서 비로그인 읽기·쓰기를 실행했을 때 모두 거부되어야 합니다. 실제 인증·상품·이미지 기능을 추가하는 단계에서 필요한 최소 권한으로 규칙을 확장합니다.
+
+### 3단계 이메일/비밀번호 회원가입과 로그인
+- 수정: `src/firebase/authApi.js`
+- 수정: `src/pages/Login.jsx`, `src/pages/SignUp.jsx`, `src/pages/Login.module.scss`
+- 수정: `src/components/Header.jsx`, `src/components/Header.module.scss`
+- 이유: Firebase Authentication 이메일/비밀번호 인증을 연결했습니다. 회원가입 성공 시 `users/{uid}`에 `email`, `nickname`, `role: 'user'`, `createAt`을 저장하고, 로그인 성공 시 홈으로 이동합니다. Header는 인증 상태에 따라 로그인/회원가입 또는 사용자명/로그아웃을 표시합니다.
+- 반응형: 370px 이하에서 로그인·회원가입 폼과 소셜 버튼의 크기를 줄이고, 햄버거 버튼을 로고 가까이 배치했습니다.
+- 참고: 기존 상품 JSON과 상품 화면은 수정하지 않았습니다.
+
+#### Firestore 보안 규칙: users 컬렉션
+```rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow create: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.role == 'user';
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.email == resource.data.email
+        && request.resource.data.role == resource.data.role;
+      allow delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+```
+
+- 적용 방법: Firebase Console > Firestore Database > Rules에서 위 규칙으로 교체 후 Publish합니다.
+- 테스트 기준: 비로그인 사용자는 `users` 읽기·쓰기가 거부되고, 로그인 사용자는 자신의 UID와 같은 문서만 생성·조회·수정할 수 있어야 합니다. `role`과 `email`을 임의로 변경하는 요청은 거부되어야 합니다.
+
+### Firebase 환경변수 누락 시 흰 화면 방지 및 반응형 주석
+- 수정: `src/firebase/firebase.js`, `src/firebase/index.js`, `src/firebase/authApi.js`
+- 수정: 반응형 규칙이 있는 Sass Module 파일과 `src/styles/reset.scss`
+- 이유: `.env`에 Firebase 설정이 없을 때 Auth 초기화 오류가 Header까지 전파되어 흰 화면이 될 수 있어, 설정되지 않은 경우 초기화를 보류하고 로그인 시 한글 안내를 표시하도록 수정했습니다.
+- 반응형 주석: 각 `@media` 블록에 대상 화면 폭과 레이아웃 변경 목적을 기록했습니다.
+- 참고: Firebase 실제 환경변수 값은 기록하지 않았습니다.
+
+### 4-1단계 마이페이지 기본 화면과 접근 권한
+- 수정: `src/components/ProtectedRoute.jsx`, `src/pages/MyPage.jsx`, `src/App.jsx`
+- 수정: `src/components/Header.jsx`, `src/components/Header.module.scss`
+- 추가: `src/pages/MyPageContent.module.scss`
+- 이유: `/mypage` 경로를 로그인 사용자 전용으로 추가했습니다. 인증 상태가 복원되는 동안에는 로딩 문구를 표시하고, 확인 전 로그인 페이지로 이동하지 않습니다. MyPage는 Authentication의 표시 이름·이메일만 사용하며 주문, 장바구니, 찜 데이터는 아직 연결하지 않았습니다.
+- 스타일: 기존 `MyPage.module.scss`는 수정하지 않았고, 기본 화면 스타일은 새 Sass Module에만 작성했습니다.
+- 반응형: 700px 이하에서는 회원 정보와 4개 메뉴 카드를 한 열로 표시합니다.
+- Firebase 보안 규칙: 이번 단계에서는 Firestore 읽기·쓰기를 추가하지 않았습니다. 3단계의 `users/{uid}` 본인 문서 규칙을 그대로 유지합니다.
+
+### Firebase 설정 진단 보완
+- 수정: `src/firebase/firebase.js`, `src/firebase/index.js`, `src/firebase/authApi.js`
+- 이유: Firebase 설정이 누락됐을 때 실제 값 없이 누락된 환경변수 이름만 한글 오류 메시지에 표시하도록 보완했습니다. Vite 서버가 이전 환경변수 상태로 실행 중인지도 확인하기 쉬워집니다.
+- 참고: 실제 환경변수 값은 코드와 이력에 기록하지 않았습니다.
+
+### Firebase API Key 환경변수 로딩 오류 수정
+- 수정: `.env` (실제 값 변경 없음)
+- 이유: `.env` 첫 줄의 인코딩 문제로 Vite가 `VITE_FIREBASE_API_KEY`만 읽지 못해 회원가입 시 설정 누락 오류가 발생했습니다. 파일을 UTF-8(BOM 없음)으로 저장해 Vite 로더에서 6개 Firebase 변수가 모두 인식되는 것을 확인했습니다.
+- 참고: 실제 환경변수 값은 확인·기록·노출하지 않았습니다.
+
+### 4-2단계 마이페이지 회원정보 Firestore 연결
+- 수정: `src/firebase/userApi.js`, `src/firebase/authApi.js`
+- 수정: `src/pages/MyPage.jsx`, `src/pages/MyPageContent.module.scss`
+- 이유: 현재 로그인한 사용자의 UID로 `users/{uid}` 문서를 조회해 닉네임, 이메일, 가입일을 표시합니다. 조회 중에는 로딩 문구를 표시하고 실패 시 한글 오류 메시지를 표시합니다. 닉네임은 Firestore와 Authentication 프로필에 함께 저장하며, 비밀번호 변경은 현재 비밀번호 재인증 후 Firebase Authentication에 반영합니다.
+- 범위 제외: 주문 내역, 장바구니, 찜한 상품 영역은 수정하지 않았습니다.
+
+#### Firestore 보안 규칙: users 컬렉션 (닉네임 수정 제한)
+```rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow create: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['email', 'nickname', 'role', 'createAt'])
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.role == 'user'
+        && request.resource.data.createAt is timestamp;
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['nickname'])
+        && request.resource.data.nickname is string;
+      allow delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+```
+
+- 적용 방법: Firebase Console > Firestore Database > Rules에서 위 규칙으로 교체 후 Publish합니다.
+- 테스트 기준: 로그인 사용자가 자신의 `users/{uid}` 문서를 읽고 닉네임만 수정할 수 있어야 합니다. 다른 UID 문서, `email`·`role`·`createAt` 수정, 비로그인 요청은 모두 거부되어야 합니다.
+
+### 4-3단계 users 문서가 없는 인증 사용자 처리
+- 수정: `src/firebase/userApi.js`, `src/firebase/authApi.js`, `src/pages/MyPage.jsx`
+- 수정: `src/components/Header.jsx`
+- 이유: Authentication에는 로그인 상태가 있지만 Firestore `users/{uid}` 문서가 없는 경우, 문서가 없을 때만 트랜잭션으로 기본 회원 문서를 생성합니다. 기본 문서는 `email`, `nickname`, `role: 'user'`, `createAt: serverTimestamp()`을 사용하며 기존 문서는 덮어쓰지 않습니다.
+- Header: Login·Signup 메뉴 영역에 `MyPage` 링크를 추가했습니다. 비로그인 사용자는 기존 보호 라우트에 따라 로그인 페이지로 이동합니다.
+- Firebase 보안 규칙: 4-2단계의 users 생성 규칙이 `role: 'user'`와 `createAt is timestamp`을 허용하므로 추가 변경 없이 적용됩니다.
+- 테스트 기준: `users/{uid}` 문서를 수동으로 삭제한 뒤 로그인 상태에서 `/mypage`에 접근하면 기본 문서가 한 번 생성되어야 합니다. 기존 문서가 있으면 닉네임·가입일·role이 변경되지 않아야 합니다.
+
+### 4-4단계 마이페이지 주문 내역 Firestore 연결
+- 수정: `src/firebase/orderApi.js`, `src/pages/MyPage.jsx`, `src/pages/MyPageContent.module.scss`
+- 이유: 현재 로그인 사용자의 UID로 `orders` 컬렉션에서 `userId`가 같은 주문만 조회합니다. 조회 결과는 `createAt` 기준 최신순으로 정렬하며, 상품명·주문일·수량·주문금액을 표시합니다.
+- 주문 데이터 기준 필드: `userId`, `productName`, `quantity`, `totalPrice`, `createAt`.
+- 오류 처리: 주문 조회 로딩·실패·빈 목록 상태를 주문 내역 영역 안에서만 표시하며, 회원 정보 영역에는 영향을 주지 않습니다.
+- 범위 제외: 주문 생성, 장바구니, 찜한 상품 영역은 수정하지 않았고 localStorage를 사용하지 않았습니다.
+
+#### Firestore 보안 규칙: orders 읽기 전용
+```rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow create: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['email', 'nickname', 'role', 'createAt'])
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.role == 'user'
+        && request.resource.data.createAt is timestamp;
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['nickname'])
+        && request.resource.data.nickname is string;
+      allow delete: if false;
+    }
+
+    match /orders/{orderId} {
+      allow read: if request.auth != null
+        && resource.data.userId == request.auth.uid;
+      allow create, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+```
+
+- 적용 방법: Firebase Console > Firestore Database > Rules에서 위 규칙으로 교체 후 Publish합니다.
+- 테스트 기준: 로그인 사용자는 자신의 `userId` 주문만 읽을 수 있어야 하며, 다른 사용자의 주문·비로그인 주문 읽기·클라이언트 주문 생성/수정/삭제는 모두 거부되어야 합니다.
+
+### Header 정렬 및 마이페이지 장바구니·찜 목록 표시
+- 수정: `src/components/Header.module.scss`
+- 수정: `src/pages/MyPage.jsx`, `src/pages/MyPageContent.module.scss`
+- 수정: `src/utils/localStorage.js`
+- 이유: 데스크톱 Header를 로고 → 검색 → 계정/마이페이지/위시리스트/카트 순서의 한 줄 레이아웃으로 정리하고, 상단 메뉴와 카테고리 메뉴 사이 간격을 넓혔습니다. 기존 localStorage 장바구니·찜 목록을 마이페이지 카드에 표시하며 저장 시 같은 탭에서도 즉시 갱신됩니다.
+- 참고: 주문 내역과 회원정보 조회 로직은 수정하지 않았고, Firebase 보안 규칙 변경도 없습니다.
+### MyPage Firestore cart connection (4-5)
+- Added: `src/firebase/cartApi.js`
+- Modified: `src/pages/MyPage.jsx`, `src/pages/MyPageContent.module.scss`
+- Reason: MyPage now reads the signed-in user's Firestore cart from `carts/{uid}/items`. It shows item name, price, quantity, item total, a highlighted total, an empty state, a cart link, and confirmed individual deletion. Cart data in MyPage does not use localStorage; wishlist behavior is unchanged.
+
+#### Firestore security rules: cart test rules
+```rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow create: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['email', 'nickname', 'role', 'createAt'])
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.role == 'user'
+        && request.resource.data.createAt is timestamp;
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['nickname'])
+        && request.resource.data.nickname is string;
+      allow delete: if false;
+    }
+
+    match /orders/{orderId} {
+      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow create, update, delete: if false;
+    }
+
+    match /carts/{userId}/items/{itemId} {
+      allow read, create, update, delete: if request.auth != null && request.auth.uid == userId;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+```
+- Apply in Firebase Console > Firestore Database > Rules, then Publish. Test with two users: each user can only access `carts/{uid}/items` under their own UID.
+### Login and SignUp scale adjustment
+- Modified: `src/pages/Login.module.scss`
+- Reason: Login and SignUp share this SCSS module. Their desktop content width and title scale were reduced by approximately 1.5rem, input text was reduced by 0.5rem, the main action button text was made slightly smaller, and the main action button now moves up 10px on hover. Mobile rules remain unchanged.
+### Banner transition, guest cart empty state, and ALL label adjustment
+- Modified: `src/components/MainBanner.jsx`, `src/components/MainBanner.module.scss`, `src/pages/Cart.jsx`, `src/pages/Cart.module.scss`, `src/components/CategoryMenu.module.scss`
+- Reason: Banner images now overlap and reveal with a clip-path animation, so the previous image stays visible while the next image naturally slides in. The empty cart for a signed-out visitor displays the existing `cotti-3D.glb` model at the center. The category ALL label was increased by 1.3rem (to 2.3rem). No Firebase data or security rules were changed.
+### Banner controls layering fix
+- Modified: `src/components/MainBanner.module.scss`
+- Reason: The active clip-path slide has a stacking layer, so the banner overlay was explicitly moved above it. Previous/next buttons, text, and dots remain visible and clickable during every transition.
+### Firestore cart saving and shared display
+- Modified: `src/firebase/cartApi.js`, `src/components/ProductCard.jsx`, `src/pages/ProductDetail.jsx`, `src/pages/Cart.jsx`
+- Reason: Signed-in users now save cart additions, quantity changes, individual removals, and clear-cart actions to Firestore at `carts/{uid}/items`. Cart and MyPage read this same path, so newly added products display in both places. Signed-out users continue using the original local cart behavior.
+- Security rules: The existing `match /carts/{userId}/items/{itemId}` rule with authenticated owner-only read/create/update/delete must remain published. No environment variable values were added.
+### Intro duration and empty cart model correction
+- Modified: `src/components/IntroVideo.jsx`, `src/components/IntroVideo.module.scss`, `src/pages/Cart.jsx`
+- Reason: The intro now finishes immediately when the video ends, with a 5-second maximum timeout and no frozen fade-out state. Every empty cart state, including signed-in users, now shows `cotti-3D.glb` instead of the previous placeholder image.
+### MyPage final audit: Firestore wishlist read and delete
+- Added: `src/firebase/wishlistApi.js`
+- Modified: `src/pages/MyPage.jsx`, `src/pages/MyPageContent.module.scss`
+- Reason: MyPage wishlist now reads and deletes only the signed-in user's `wishlists/{uid}/items` documents, with independent loading and error states. The previous MyPage wishlist localStorage synchronization was removed.
+### Admin authorization (5-1)
+- Modified: `src/components/AdminRoute.jsx`, `src/App.jsx`
+- Reason: `/admin` now waits for Firebase Authentication restoration, then reads only `users/{uid}.role`. Only `role: 'admin'` can render the existing Admin page; signed-out users go to Login and non-admin users go to Home. The client does not assign or update administrator roles.
+- Security rule note: Keep the existing users update rule limited to `nickname` only. Administrator role assignment must be performed in Firebase Console or a trusted server-side Admin SDK script, never from browser code.
+### Admin dashboard layout and account setup note
+- Modified: `src/pages/Admin.jsx`, `src/pages/Admin.module.scss`
+- Added: `관리자계정.txt`
+- Reason: The protected Admin route now has a responsive dashboard layout with product, order, and member management entry areas. The account note records the user-provided UID and Firestore role location without storing a plaintext password. Administrator role changes remain Console/Admin SDK only.
+### Admin page layout and Header menu (5-2)
+- Modified: `src/components/Header.jsx`, `src/pages/Admin.jsx`, `src/pages/Admin.module.scss`
+- Reason: Header shows the Admin link only after the authenticated user's `users/{uid}.role` is confirmed as `admin`. The protected `/admin` page now has a dashboard default, left sidebar menu, and right content layout.
+### Cotti 3D initial facing direction
+- Modified: `src/pages/Home.jsx`, `src/pages/Cart.jsx`
+- Reason: Added a 180-degree initial camera orbit to every displayed `cotti-3D.glb` model so it starts facing forward while preserving turntable rotation.
+### Admin member management (5-2)
+- Added: `src/firebase/adminApi.js`, `src/pages/AdminMembers.jsx`, `src/pages/AdminMembers.module.scss`
+- Modified: `src/App.jsx`, `src/pages/Admin.jsx`, `src/pages/Admin.module.scss`
+- Reason: Added protected `/admin/members` with latest-first member list (nickname, email, joined date), independent loading/error display, and working Admin sidebar links.
+
+#### Firestore security rules: admin member read
+```rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    match /users/{userId} {
+      allow create: if signedIn() && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['email', 'nickname', 'role', 'createAt'])
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.role == 'user'
+        && request.resource.data.createAt is timestamp;
+      allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+      allow update: if signedIn() && request.auth.uid == userId
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['nickname'])
+        && request.resource.data.nickname is string;
+      allow delete: if false;
+    }
+    match /orders/{orderId} {
+      allow read: if signedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update, delete: if false;
+    }
+    match /carts/{userId}/items/{itemId} { allow create, read, update, delete: if signedIn() && request.auth.uid == userId; }
+    match /wishlists/{userId}/items/{itemId} { allow create, read, update, delete: if signedIn() && request.auth.uid == userId; }
+    match /{document=**} { allow read, write: if false; }
+  }
+}
+```
+- Apply this complete rule set in Firebase Console > Firestore Database > Rules, then Publish. Regular users can read only their own user document; admins can read the member list.
+### Admin product and inventory management
+- Added: `src/firebase/productApi.js`, `src/pages/AdminProducts.jsx`
+- Modified: `src/App.jsx`, `src/pages/Products.jsx`
+- Reason: Added administrator-only product registration, edit, deletion, stock and recommendation fields, plus one-click JSON migration. Public product list now reads Firestore `products` documents. Image is stored as the existing image path/URL field.
+
+#### Product document structure
+```text
+products/{autoId}
+  sourceId: string (JSON migration only)
+  name: string
+  category: string
+  categoryValue: string
+  price: number
+  discountRate: number
+  stock: number
+  image: string
+  description: string
+  isRecommended: boolean
+  createdAt: serverTimestamp
+  updatedAt: serverTimestamp
+```
+### 상품·재고 관리 완성 및 Firestore 목록·상세 연결
+- 추가: `src/pages/AdminProductManager.jsx`, `src/pages/AdminProductManager.module.scss`
+- 수정: `src/firebase/productApi.js`, `src/App.jsx`, `src/pages/Products.jsx`, `src/pages/ProductDetail.jsx`, `src/pages/Admin.jsx`, `src/pages/AdminMembers.jsx`, `상품데이터구조.txt`
+- 이유: 관리자 전용 상품 등록·수정·삭제·재고·추천 여부 관리와 JSON 마이그레이션을 구현했습니다. 상품명 우선 목록, 추천/수정/삭제 정렬, 한글 오류, 즉시 목록 갱신을 적용했고 공개 상품 목록과 상세는 Firestore 자동 문서 ID를 사용합니다.
+
+#### Firestore 보안 규칙: 관리자 상품 관리
+```rules
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isAdmin() {
+      return signedIn()
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasAll([
+          'name', 'category', 'categoryValue', 'price', 'discountRate',
+          'stock', 'image', 'description', 'isRecommended', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.name is string
+        && request.resource.data.price is number
+        && request.resource.data.stock is number
+        && request.resource.data.isRecommended is bool
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp;
+      allow update: if isAdmin()
+        && request.resource.data.name is string
+        && request.resource.data.price is number
+        && request.resource.data.stock is number
+        && request.resource.data.isRecommended is bool
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.updatedAt is timestamp;
+      allow delete: if isAdmin();
+    }
+  }
+}
+```
+- 위 `products` 블록과 `signedIn`/`isAdmin` 함수를 기존 전체 규칙에 합쳐 Firebase Console > Firestore Database > Rules에서 직접 Publish해야 합니다.
+2026-07-29 - 관리자 상품 재고관리 및 품절 연동
+1. src/firebase/productApi.js
+   - 재고와 품절 임박 기준을 0 이상의 정수로 정규화했습니다.
+   - 재고만 즉시 저장하는 updateProductStock()를 추가했습니다.
+   - 재고 변경 시 updatedAt에 serverTimestamp()가 저장됩니다.
+2. src/pages/AdminProductManager.jsx, AdminProductManager.module.scss
+   - 관리자 목록에 현재 재고, 판매 중/품절 임박/품절 상태를 표시했습니다.
+   - 상품별 재고를 직접 입력하고 Enter 또는 포커스 해제 시 즉시 저장하도록 연결했습니다.
+   - 음수와 소수 입력을 차단하고 한글 오류 메시지를 표시합니다.
+   - 품절 임박 기준을 상품별로 설정할 수 있으며 기존 상품의 기본값은 5개입니다.
+   - 상품 목록을 한 페이지당 10개로 제한하고 « ‹ 1 2 3 › » 페이지 버튼을 추가했습니다.
+3. src/components/ProductCard.jsx, ProductCard.module.scss, src/pages/ProductDetail.jsx
+   - 상품 목록과 상세에 품절/품절 임박 상태를 표시했습니다.
+   - 품절 상품의 장바구니 추가와 구매 진입을 차단했습니다.
+4. src/firebase/cartApi.js, src/pages/Cart.jsx, src/components/CartItem.jsx
+   - 로그인 장바구니 추가 시 Firestore의 최신 상품 재고를 확인합니다.
+   - 장바구니 진입 시 최신 상품 재고와 동기화합니다.
+   - 품절 상품의 수량 증가와 재고를 넘는 수량 변경을 차단합니다.
+
+Firestore 보안 규칙 참고:
+- 기존 products 규칙의 관리자 create/update/delete 권한으로 재고 수정이 가능합니다.
+- 더 엄격히 검사하려면 products update 규칙에 다음 조건을 추가할 수 있습니다.
+  && request.resource.data.stock is int
+  && request.resource.data.stock >= 0
+  && request.resource.data.updatedAt is timestamp
+2026-07-29 - 관리자 재고 즉시 반영 방식 개선
+- src/pages/AdminProductManager.jsx
+  - 재고 입력 후 Enter/포커스 해제를 기다리지 않고 값 변경 즉시 Firestore에 저장하도록 수정했습니다.
+  - 저장 성공과 동시에 관리자 상품 목록의 재고 및 품절 상태가 갱신됩니다.
+2026-07-29 - 홈 상품 재고 미반영 오류 수정
+- 원인: Home의 Our Picks가 Firestore가 아닌 products-fixed.json을 읽고 있어 모든 상품의 stock이 없는 값(0)으로 판정되었습니다.
+- src/firebase/productApi.js: 상품 컬렉션 실시간 구독 함수 subscribeProducts()를 추가했습니다.
+- src/pages/Home.jsx: JSON 조회를 제거하고 Firestore 상품 실시간 구독으로 변경했습니다.
+- src/pages/Products.jsx: 일반 상품 목록도 Firestore 재고 변경을 새로고침 없이 반영하도록 실시간 구독으로 변경했습니다.
+2026-07-29 - 장바구니/바로구매 버튼 복구
+- src/components/ProductCard.jsx
+  - 장바구니 버튼이 상품 저장 후 /cart로 이동하도록 연결했습니다.
+  - 바로구매 실패 시 권한 및 재고 오류를 한글 알림으로 표시합니다.
+- src/pages/ProductDetail.jsx
+  - 기능이 연결되지 않았던 바로구매 버튼에 장바구니 저장 및 /cart 이동 기능을 연결했습니다.
+  - 장바구니 저장 실패를 한글 알림으로 표시합니다.
+- Firestore에서 로그인 사용자의 carts/{uid}/items 하위 컬렉션 접근 규칙이 필요합니다.
+
+장바구니 보안 규칙(상품 규칙과 같은 databases 블록 안, 전체 차단 규칙보다 위에 추가):
+match /carts/{userId}/items/{itemId} {
+  allow create, read, update, delete: if request.auth != null
+    && request.auth.uid == userId;
+}
+2026-07-29 - 위시리스트 최신 재고 연동 및 전체 보안 규칙 정리
+- src/pages/Wishlist.jsx: 저장된 찜 ID를 Firestore products 실시간 데이터와 결합해 최신 재고/품절 상태를 표시합니다.
+- src/components/ProductCard.jsx: 로그인 사용자의 찜 추가/삭제를 Firestore에 저장하고 권한 오류를 한글로 표시합니다.
+- Firebase Console에는 users, products, carts, wishlists, orders를 포함한 전체 규칙을 한 번에 게시해야 합니다.
+2026-07-29 - 관리자 추천상품 관리 구현
+- src/firebase/productApi.js: isRecommended를 즉시 변경하고 updatedAt을 serverTimestamp()로 저장하는 API를 추가했습니다.
+- src/pages/AdminProductManager.jsx, AdminProductManager.module.scss
+  - 상품별 추천/추천 해제 버튼과 추천상품 현재 개수를 표시했습니다.
+  - 추천상품은 최대 400개까지 허용하며 초과 시 한글 안내로 저장을 차단합니다.
+  - 관리자 상품 등록/수정 폼의 isRecommended 설정에도 동일한 400개 제한을 적용했습니다.
+- src/pages/Admin.jsx, src/pages/AdminMembers.jsx
+  - 추천상품 관리 메뉴를 /admin/products 상품관리 화면으로 연결했습니다.
+- 관리자 전용 라우트와 products 관리자 쓰기 보안 규칙을 그대로 사용합니다.
+2026-07-29 - 추천상품 관리 화면 분리
+- src/pages/AdminRecommended.jsx 생성
+  - /admin/recommended에서 상품 목록과 추천/추천 해제 버튼만 표시합니다.
+  - 상품 등록·수정·재고 입력 폼은 표시하지 않습니다.
+  - 한 페이지에 10개씩 표시하고 추천상품 최대 400개 제한을 유지합니다.
+- src/App.jsx: AdminRoute로 보호되는 /admin/recommended 경로를 추가했습니다.
+- src/pages/Admin.jsx, AdminMembers.jsx, AdminProductManager.jsx: 추천상품 관리 메뉴를 새 경로로 연결했습니다.
+- 기존 상품관리와 디자인 구조를 재사용하여 별도 SCSS 파일은 생성하지 않았습니다.
+2026-07-29 - Firestore 공지사항 기능 구현
+- src/firebase/noticeApi.js: notices 컬렉션 목록/상세/작성/수정/삭제 API를 구현했습니다.
+- 데이터 구조: title(string), content(string), authorUid(string), updateAt(serverTimestamp).
+- src/pages/Notice.jsx, Notice.module.scss: 비회원도 볼 수 있는 최신순 목록과 10개 단위 페이지 버튼을 구현했습니다.
+- src/pages/NoticeDetail.jsx, NoticeDetail.module.scss: 공개 상세 화면을 구현했습니다.
+- src/pages/AdminNotices.jsx 생성: 관리자 작성·기존 내용 수정·삭제 확인·즉시 목록 갱신을 구현했습니다.
+- src/App.jsx: /admin/notices 관리자 전용 경로를 추가했습니다.
+- 관리자 페이지들의 공지사항 관리 메뉴를 /admin/notices로 연결했습니다.
+
+Firestore 전체 규칙의 마지막 전체 차단 규칙보다 위에 추가할 공지사항 규칙:
+match /notices/{noticeId} {
+  allow read: if true;
+  allow create: if isAdmin()
+    && request.resource.data.authorUid == request.auth.uid
+    && request.resource.data.updateAt is timestamp;
+  allow update: if isAdmin()
+    && request.resource.data.authorUid == request.auth.uid
+    && request.resource.data.updateAt is timestamp;
+  allow delete: if isAdmin();
+}
+2026-07-29 - 장바구니 결제금액 숫자 가독성 개선
+- src/components/OrderSummary.module.scss
+  - 상품금액, 배송비, 총결제금액의 값만 기본 산세리프 글꼴로 변경했습니다.
+  - 제목, 항목명, 버튼과 기존 레이아웃은 유지했습니다.

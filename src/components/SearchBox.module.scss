@@ -1,0 +1,80 @@
+/* 검색창과 검색 버튼을 가로로 배치 */
+.searchBox {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 300px;
+}
+
+/* 흰색 검색 입력창 */
+.input {
+  width: 60%;
+  height: 46px;
+  padding: 0 20px;
+  border: 2px solid #9b887b;
+  border-radius: 24px;
+  background-color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+/* 입력창을 선택했을 때 */
+.input:focus,
+.input:focus-visible {
+  border-color: #6b5e56;
+  outline: none;
+}
+
+/* 갈색 검색 버튼 */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  padding: 0 30px;
+  border: 0;
+  border-radius: 24px;
+  background-color: #8a7869;
+  color: #fffefa;
+  font-size: 30px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+/* 검색 버튼에 마우스를 올렸을 때 */
+.button:hover {
+  background-color: #685e57;
+}
+
+/* 화면이 좁으면 검색창을 한 줄 전체에 표시 */
+@media (max-width: 900px) {
+  .searchBox {
+    order: 3;
+    flex-basis: 100%;
+  }
+}
+
+// 작은 모바일: 입력창과 버튼을 낮추고 최소 폭을 제거해 370px에서도 맞춥니다.
+@media (max-width: 560px) {
+  .searchBox {
+    min-width: 0;
+    gap: 0.5rem;
+  }
+
+  .input {
+    width: 100%;
+    min-width: 0;
+    height: 2.6rem;
+    padding: 0 0.9rem;
+  }
+
+  .button {
+    height: 2.6rem;
+    padding: 0 1rem;
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,27 @@
+Firestore 상품 데이터 구조
+
+컬렉션: products
+문서 ID: Firestore 자동 ID
+
+name: 상품명 (string)
+category: 카테고리명 (string)
+categoryValue: 카테고리 값 (string)
+price: 가격 (number)
+discountRate: 할인률 (number)
+stock: 재고 (number)
+image: 이미지 경로 또는 URL (string)
+description: 설명 (string)
+isRecommended: 추천 여부 (boolean)
+createdAt: 서버 타임스탬프
+updatedAt: 서버 타임스탬프
+sourceId: JSON 마이그레이션 원본 ID (string, 선택)
+
+마이그레이션
+- 관리자 페이지 /admin/products의 "JSON 상품 마이그레이션" 버튼 사용
+- 원본 파일: public/data/products-fixed.json
+- sourceId를 기준으로 이미 옮긴 JSON 상품은 중복 등록하지 않음
+- 새 상품은 Firestore 자동 문서 ID를 사용
+
+접근 권한
+- 상품 조회: 누구나 가능
+- 상품 등록/수정/삭제/JSON 마이그레이션: users/{uid}.role이 admin인 사용자만 가능

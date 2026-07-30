@@ -1,0 +1,144 @@
+.middle {
+  width: min(1500px, 100% - 40px);
+  margin: 5rem auto;
+  padding: 32px 0 64px;
+}
+
+.middle2 {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 32px;
+  color: #0c0b0a;
+  font-size: 4rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 7rem;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 40rem minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(64px, 7vw, 120px);
+}
+
+.imgBox {
+  width: 40rem;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #f1eee7;
+}
+.imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.impoBox {
+  color: #292521;
+}
+
+.pi {
+  margin: 0;
+  font-size: 1.9rem;
+  color: #6c6258;
+}
+
+.h {
+  margin: 22px 0 18px;
+  font-size: clamp(3.2rem, 5vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.priseArea {
+  font-size: 2rem;
+}
+.priseArea > span {
+  margin-right: 6px;
+  font-weight: 700;
+  color: #9b8371;
+}
+.priseArea del {
+  color: #756a60;
+}
+.priseArea > strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 2.7rem;
+  color: #171411;
+}
+
+.deliveryArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 24px;
+  font-size: 1.95rem;
+}
+.deliveryArea strong {
+  font-weight: 500;
+}
+
+.QuantityArea {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+.QuantityArea > span {
+  font-size: 2rem;
+}
+
+.finalPrice {
+  margin-top: 26px;
+  border-top: 1px solid #e2ddd4;
+}
+.finalPrice h2 {
+  margin: 18px 0 16px;
+  font-size: 2.55rem;
+  font-weight: 400;
+}
+.finalPrice h2 strong {
+  font-weight: 800;
+}
+
+.btnLast {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.btnLast button {
+  min-height: 64px;
+  border: 0;
+  border-radius: 11px;
+  background: #e3dfd5;
+  color: #51483f;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btnLast button:hover {
+  transform: translateY(-10px);
+  background: #cfc3b5;
+}
+
+@media (max-width: 760px) {
+  .middle {
+    padding-top: 24px;
+  }
+  .section {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .imgBox {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+}
+
+/*# sourceMappingURL=.build-detail-check.css.map */

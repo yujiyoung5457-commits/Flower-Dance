@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "image": "/img/banner01.png",
+    "eyebrow": "NEW ARRIVAL",
+    "title": "우리 아기 첫 식탁, 감성 가득 신상품",
+    "description": "세련된 디자인과 컬러감을 강조하여 프리미엄 이미지"
+  },
+  {
+    "id": 2,
+    "image": "/img/banner02.png",
+    "eyebrow": "DAILY BASIC",
+    "title": "건강하고 행복한 식사 시간을 위한 필수 아이템",
+    "description": "실리콘 식기의 안전성과 하이체어의 편안함"
+  },
+  {
+    "id": 3,
+    "image": "/img/banner03.png",
+    "eyebrow": "FREE DELIVERY",
+    "title": "5만원 이상 무료배송",
+    "description": "필요한 상품을 배송비 부담 없이 쇼핑하세요."
+  }
+]

@@ -1,0 +1,24 @@
+.root{
+  display: grid;
+  width: min(1500px, calc(100% - 2.5rem));
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+// 태블릿: 카드가 눌리지 않도록 상품 목록을 4열에서 2열로 변경합니다.
+@media (max-width: 1100px) {
+  .root {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+// 모바일: 카드 안의 이미지와 정보가 충분히 보이도록 한 줄에 1개만 표시합니다.
+@media (max-width: 560px) {
+  .root {
+    width: calc(100% - 2rem);
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

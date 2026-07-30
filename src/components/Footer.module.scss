@@ -1,0 +1,114 @@
+.root {
+  box-sizing: border-box;
+}
+footer{
+  width: 100%;
+  height: 300px;
+  background-color: #E0DCD1;
+  img{
+    width: 30%;
+    // border: 1px solid red;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .left{
+    width: min(1600px, calc(100% - 40px));
+    height: 100%;
+    // border: 1px solid red;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    gap: 50px;
+  }
+  .menu{
+    display: flex;
+    font-size: 19px;
+    flex-direction: column;
+    .one{
+      h2{
+        font-size: 26px;
+      }
+    }
+    .two{
+      display: flex;
+      gap: 20px;
+    }
+    .three{
+      font-size: 12px;
+    }
+  }
+}
+
+// 모바일: 푸터의 로고와 안내 문구를 세로 배치해 가로 넘침을 막습니다.
+@media (max-width: 768px) {
+  footer {
+    height: auto;
+    min-height: 12rem;
+    padding: 1.5rem 0;
+
+    img {
+      width: min(8rem, 32%);
+    }
+
+    .left {
+      width: calc(100% - 2rem);
+      height: auto;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .menu {
+      min-width: 0;
+      font-size: 0.9rem;
+
+      .one h2 { font-size: 1.2rem; }
+      .two { flex-wrap: wrap; gap: 0.6rem 1rem; }
+      .three { font-size: 0.7rem; }
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  footer {
+    min-height: 10rem;
+    padding: 1rem 0;
+
+    img {
+      width: min(6.5rem, 30%);
+    }
+
+    .left {
+      gap: 0.7rem;
+      min-height: 9rem;
+    }
+
+    .menu {
+      justify-content: center;
+      font-size: 0.7rem;
+      line-height: 1.25;
+
+      br {
+        display: none;
+      }
+
+      .one h2 {
+        font-size: 0.95rem;
+        line-height: 1.25;
+      }
+
+      .two {
+        gap: 0.25rem 0.55rem;
+        margin-top: 0.25rem;
+      }
+
+      .three {
+        margin-top: 0.65rem;
+        font-size: 0.58rem;
+        line-height: 1.3;
+      }
+    }
+  }
+}

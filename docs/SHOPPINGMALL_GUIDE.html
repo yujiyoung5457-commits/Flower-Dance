@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>Flower Dance 쇼핑몰 코드 안내서</title>
+  <style>
+    @page { size: A4 landscape; margin: 13mm; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #292521; font-family: "Malgun Gothic", "Noto Sans KR", sans-serif; font-size: 13px; }
+    .page { min-height: 180mm; page-break-after: always; position: relative; padding: 4mm 5mm; }
+    .page:last-child { page-break-after: auto; }
+    h1 { margin: 0 0 5px; font-size: 30px; letter-spacing: -1px; }
+    h2 { margin: 0 0 12px; font-size: 21px; }
+    h3 { margin: 0 0 6px; font-size: 15px; }
+    p { margin: 4px 0; line-height: 1.6; }
+    .sub { color: #74695e; font-size: 14px; }
+    .tag { display: inline-block; padding: 4px 11px; border-radius: 16px; background: #f1b300; font-weight: 800; font-size: 14px; }
+    .box { border-radius: 12px; padding: 12px 14px; text-align: center; font-weight: 700; box-shadow: 0 2px 0 rgba(0,0,0,.07); }
+    .red { background: #ec4545; color: white; }
+    .blue { background: #2f60b3; color: white; }
+    .beige { background: #e4dfd4; color: #39322b; }
+    .green { background: #dcebdd; color: #285636; }
+    .yellow { background: #f4bd19; color: #2c2516; }
+    .outline { border: 2px solid #d6cbbb; background: white; }
+    .flow { display: flex; align-items: center; justify-content: center; gap: 9px; margin: 16px 0; }
+    .arrow { color: #9c8d7d; font-size: 24px; font-weight: 800; }
+    .architecture { display: grid; grid-template-columns: 220px 44px 1fr; align-items: center; margin-top: 22px; }
+    .routes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .routes .box { min-height: 62px; display: flex; align-items: center; justify-content: center; }
+    .note { padding: 10px 14px; background: #fff7dc; border-left: 5px solid #f1b300; border-radius: 4px; margin-top: 15px; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .step { border: 1px solid #d9d1c6; border-radius: 12px; padding: 12px; min-height: 113px; }
+    .step strong { color: #2f60b3; }
+    .mini-flow { display: flex; align-items: stretch; gap: 8px; margin: 12px 0; }
+    .mini-flow .box { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 58px; }
+    .mini-flow .arrow { align-self: center; }
+    .file-tree { font-family: Consolas, "Malgun Gothic", monospace; white-space: pre-line; line-height: 1.75; background: #f7f5f1; border-radius: 10px; padding: 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th { background: #e7e0d5; }
+    th, td { border: 1px solid #d8d0c6; padding: 7px 8px; vertical-align: top; text-align: left; }
+    code { color: #955326; font-family: Consolas, monospace; }
+    .footer { position: absolute; bottom: 0; right: 5mm; color: #94887d; font-size: 10px; }
+
+    /* 휴대폰에서는 도형과 설명을 한 줄씩 세로로 보여 줍니다. */
+    @media screen and (max-width: 700px) {
+      body { font-size: 14px; }
+      .page { min-height: auto; padding: 22px 16px 32px; page-break-after: auto; }
+      h1 { font-size: 27px; line-height: 1.3; }
+      h2 { font-size: 22px; line-height: 1.35; }
+      h3 { font-size: 17px; }
+      .sub { font-size: 14px; }
+      .architecture { display: block; margin-top: 18px; }
+      .architecture > .box { margin-bottom: 14px; }
+      .architecture > .arrow { display: none; }
+      .routes, .two, .three { grid-template-columns: 1fr; }
+      .routes { margin-top: 12px; }
+      .flow, .mini-flow { flex-direction: column; gap: 8px; margin: 14px 0; }
+      .flow .box, .mini-flow .box { width: 100%; flex: none; }
+      .flow .arrow, .mini-flow .arrow { transform: rotate(90deg); line-height: 18px; }
+      .step { min-height: 0; padding: 14px; }
+      .file-tree { overflow-x: auto; font-size: 11px; padding: 12px; }
+      table { display: block; overflow-x: auto; white-space: nowrap; }
+      th, td { white-space: normal; min-width: 140px; }
+      .footer { position: static; margin-top: 20px; text-align: right; }
+    }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <span class="tag">Flower Dance 쇼핑몰</span>
+    <h1>코드 구조 · 데이터 흐름 안내서</h1>
+    <p class="sub">현재 실제 작성되어 동작하는 파일을 기준으로, 화면이 만들어지는 순서를 도형으로 정리했습니다.</p>
+
+    <div class="architecture">
+      <div class="box red">src/main.jsx<br><small>React 시작점</small></div>
+      <div class="arrow">→</div>
+      <div>
+        <div class="box red" style="width:230px; margin:0 auto 14px;">src/App.jsx<br><small>공통 레이아웃 + 주소별 화면 선택</small></div>
+        <div class="routes">
+          <div class="box blue">Header.jsx<br><small>로고 · 검색 · 메뉴</small></div>
+          <div class="box beige">Home.jsx<br><small>메인 화면</small></div>
+          <div class="box beige">Products.jsx<br><small>상품 목록</small></div>
+          <div class="box beige">ProductDetail.jsx<br><small>상품 상세</small></div>
+          <div class="box beige">SearchResult.jsx<br><small>검색 결과</small></div>
+          <div class="box beige">Cart.jsx<br><small>장바구니(작성 중)</small></div>
+          <div class="box blue">Footer.jsx<br><small>공통 푸터</small></div>
+          <div class="box outline">기타 페이지<br><small>로그인 · 회원가입 · 위시리스트 등</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note"><b>중요:</b> 모든 화면은 <code>App.jsx</code>의 <code>&lt;Routes&gt;</code>에서 주소와 연결됩니다. Header와 Footer는 페이지가 바뀌어도 계속 보입니다.</div>
+    <div class="footer">1 / 5</div>
+  </section>
+
+  <section class="page">
+    <h2>1. 메인 화면: <code>Home.jsx</code></h2>
+    <p class="sub">홈은 배너 → 카테고리 → 추천 상품 순서로 조립됩니다.</p>
+    <div class="mini-flow">
+      <div class="box blue">Home.jsx</div><div class="arrow">→</div>
+      <div class="box green">MainBanner.jsx<br><small>banners.json 읽기</small></div><div class="arrow">→</div>
+      <div class="box green">CategoryMenu.jsx<br><small>categories-fixed.json 읽기</small></div><div class="arrow">→</div>
+      <div class="box green">ProductList.jsx<br><small>추천 4개 표시</small></div>
+    </div>
+    <div class="three">
+      <article class="step"><strong>① MainBanner.jsx</strong><p><code>banners.json</code>을 불러와 현재 배너를 화면에 표시합니다. 4초마다 다음 배너로 바뀌며, 좌우 버튼과 점 버튼으로 직접 이동할 수 있습니다.</p></article>
+      <article class="step"><strong>② CategoryMenu.jsx</strong><p><code>categories-fixed.json</code>의 항목을 반복해서 카테고리 링크로 만듭니다. 클릭하면 해당 카테고리 상품 목록 주소로 이동합니다.</p></article>
+      <article class="step"><strong>③ 추천 상품</strong><p><code>products-fixed.json</code>을 읽고 <code>slice(0, 4)</code>로 앞의 4개만 골라 <code>ProductList</code>에 전달합니다.</p></article>
+    </div>
+    <h3 style="margin-top:22px;">상품 카드가 그려지는 과정</h3>
+    <div class="flow"><div class="box beige">상품 배열</div><div class="arrow">→</div><div class="box blue">ProductList.jsx<br><small>map() 반복</small></div><div class="arrow">→</div><div class="box green">ProductCard.jsx<br><small>상품 한 장씩 표시</small></div><div class="arrow">→</div><div class="box yellow">상세 주소<br><small>/products/:id</small></div></div>
+    <p><b>ProductCard.jsx의 기능:</b> 이미지·이름 클릭 시 상세로 이동, 할인가 계산, 하트 모양 토글입니다. 하트는 현재 카드 안에서만 바뀌며 위시리스트에 저장되지는 않습니다.</p>
+    <div class="footer">2 / 5</div>
+  </section>
+
+  <section class="page">
+    <h2>2. 상품 목록: <code>Products.jsx</code></h2>
+    <p class="sub">상품 데이터를 가져온 뒤 카테고리, 가격대, 정렬 순서로 가공해서 카드 목록에 보냅니다.</p>
+    <div class="flow"><div class="box green">products-fixed.json</div><div class="arrow">→</div><div class="box blue">카테고리 필터</div><div class="arrow">→</div><div class="box blue">가격대 필터</div><div class="arrow">→</div><div class="box blue">정렬</div><div class="arrow">→</div><div class="box yellow">ProductList</div></div>
+    <div class="two">
+      <article class="step"><strong>카테고리 필터</strong><p>URL의 <code>:category</code>와 상품의 <code>categoryValue</code>가 같은 항목만 남깁니다.</p><p>예: <code>/products/category/speaker</code> → <code>categoryValue: "speaker"</code> 상품만 표시</p></article>
+      <article class="step"><strong>가격대 필터</strong><p><code>discountRate</code>를 반영한 할인가로 비교합니다. <code>under10</code>, <code>on10</code>, <code>on20</code>, <code>on30</code> 값이 선택 기준입니다.</p></article>
+      <article class="step"><strong>정렬</strong><p><code>latest</code>는 id 내림차순, <code>low</code>는 낮은 할인가 순, <code>high</code>는 높은 할인가 순입니다.</p></article>
+      <article class="step"><strong>스타일을 바꿀 곳</strong><p>카드 전체 배치: <code>ProductList.module.scss</code><br>카드 한 장: <code>ProductCard.module.scss</code><br>페이지 제목: <code>Products.module.scss</code></p></article>
+    </div>
+    <div class="footer">3 / 5</div>
+  </section>
+
+  <section class="page">
+    <h2>3. 상품 상세 · 장바구니 흐름</h2>
+    <div class="mini-flow">
+      <div class="box yellow">상품 카드 클릭<br><small>/products/7</small></div><div class="arrow">→</div>
+      <div class="box blue">ProductDetail.jsx<br><small>useParams()로 id 읽기</small></div><div class="arrow">→</div>
+      <div class="box green">products-fixed.json에서<br>같은 id 찾기</div><div class="arrow">→</div>
+      <div class="box beige">상품 정보 표시</div>
+    </div>
+    <div class="two">
+      <article class="step"><strong>상세 가격 계산</strong><p><code>할인가 = price - (price × discountRate / 100)</code></p><p><code>총 상품 금액 = 할인가 × quantity</code></p></article>
+      <article class="step"><strong>QuantityControl.jsx</strong><p>상세 페이지가 수량 state를 가지고, 수량 버튼은 props로 받은 <code>setQuantity</code>를 호출합니다. 수량은 1 아래로 내려가지 않습니다.</p></article>
+    </div>
+    <div class="flow"><div class="box beige">장바구니 담기</div><div class="arrow">→</div><div class="box blue">localStorage의<br><code>cart</code> 읽기</div><div class="arrow">→</div><div class="box green">같은 id면 수량 증가<br>없으면 새 상품 추가</div><div class="arrow">→</div><div class="box yellow">localStorage에 저장</div></div>
+    <div class="note"><b>현재 상태:</b> 상세의 “장바구니 담기”는 localStorage에 데이터를 저장합니다. <code>Cart.jsx</code>는 목록·수량·합계 화면을 만드는 중이며, 보조 컴포넌트와 변수 이름을 정리하면 완전히 연결할 수 있습니다.</div>
+    <div class="footer">4 / 5</div>
+  </section>
+
+  <section class="page">
+    <h2>4. 실제 작성 파일 지도</h2>
+    <div class="two">
+      <div class="file-tree">src/
+├─ main.jsx                 앱 시작
+├─ App.jsx                  주소(Route)와 공통 레이아웃
+├─ components/
+│  ├─ Header.jsx            상단 메뉴 + SearchBox
+│  ├─ MainBanner.jsx        자동 배너
+│  ├─ CategoryMenu.jsx      카테고리 메뉴
+│  ├─ ProductList.jsx       카드 반복 출력
+│  ├─ ProductCard.jsx       상품 카드 1장
+│  ├─ ProductFilter.jsx     카테고리/가격 필터
+│  ├─ ProductSort.jsx       정렬 선택
+│  └─ QuantityControl.jsx   수량 증감
+└─ pages/
+   ├─ Home.jsx              메인
+   ├─ Products.jsx          상품 목록
+   ├─ ProductDetail.jsx     상세
+   ├─ SearchResult.jsx      검색 결과
+   └─ Cart.jsx              장바구니</div>
+      <div class="file-tree">public/
+├─ data/
+│  ├─ products-fixed.json   실제 상품 데이터
+│  ├─ categories-fixed.json 카테고리 데이터
+│  └─ banners.json          배너 데이터
+└─ img/                     상품/로고 이미지
+
+스타일 파일 규칙
+├─ 컴포넌트.jsx
+└─ 컴포넌트.module.scss
+
+예시
+ProductDetail.jsx
+└─ ProductDetail.module.scss
+→ 상세 페이지 레이아웃·글자·버튼 조절</div>
+    </div>
+    <h3 style="margin-top:16px;">데이터를 수정할 때</h3>
+    <table>
+      <tr><th>바꾸고 싶은 것</th><th>수정 파일</th><th>수정할 값</th></tr>
+      <tr><td>상품명·가격·할인율·카테고리·이미지</td><td><code>public/data/products-fixed.json</code></td><td><code>name</code>, <code>price</code>, <code>discountRate</code>, <code>category</code>, <code>image</code></td></tr>
+      <tr><td>상품 이미지 원본</td><td><code>public/img/</code></td><td>새 파일을 넣고 상품 데이터의 <code>image</code> 경로 변경</td></tr>
+      <tr><td>상세 이미지 크기·좌우 간격</td><td><code>ProductDetail.module.scss</code></td><td><code>.imgBox</code>, <code>.section</code></td></tr>
+      <tr><td>목록 카드 크기·하트 위치</td><td><code>ProductCard.module.scss</code></td><td><code>.card</code>, <code>.imageWrap</code>, <code>button</code></td></tr>
+    </table>
+    <div class="footer">5 / 5</div>
+  </section>
+</body>
+</html>

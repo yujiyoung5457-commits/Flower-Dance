@@ -1,0 +1,10 @@
+[
+  { "id": 1, "name": "코티 아기침대", "category": "침구류", "categoryValue": "keyboard", "price": 250000, "discountRate": 15, "image": "img/imgpd-03.png" },
+  { "id": 2, "name": "동물친구 세트", "category": "장난감", "categoryValue": "keyboard", "price": 70000, "discountRate": 12, "image": "/img/pd-01.png" },
+  { "id": 3, "name": "이유식 식기세트", "category": "식기/주방", "categoryValue": "mouse", "price": 52000, "discountRate": 10, "image": "/img/pd-02.png" },
+  { "id": 4, "name": "코티 아기 옷", "category": "의류/신발", "categoryValue": "mouse", "price": 77000, "discountRate": 5, "image": "/img/pd-03.png" },
+  { "id": 5, "name": "몰카 와이드 모니터", "category": "모니터", "categoryValue": "monitor", "price": 399000, "discountRate": 20, "image": "/img/pd-04.png" },
+  { "id": 6, "name": "시로모 슬림 노트북", "category": "노트북", "categoryValue": "laptop", "price": 1290000, "discountRate": 8, "image": "/img/pd-05.png" },
+  { "id": 7, "name": "포테이토 데스크 스피커", "category": "스피커", "categoryValue": "speaker", "price": 159000, "discountRate": 15, "image": "/img/pd-06.png" },
+  { "id": 8, "name": "몰카 액세서리 세트", "category": "액세서리", "categoryValue": "accessory", "price": 79000, "discountRate": 0, "image": "/img/pd-07.png" }
+]

@@ -1,0 +1,48 @@
+.page { width: min(1300px, calc(100% - 32px)); min-height: 65vh; margin: 0 auto; padding: 5rem 0 7rem; }
+.layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: 1.25rem; }
+.sidebar, .content { border: 1px solid #e4dcd5; border-radius: 1.5rem; background: #fff; }
+.sidebar { display: grid; align-content: start; gap: .4rem; padding: 1.5rem; }
+.sidebar p { margin: 0 0 .7rem; color: #a68d78; font-size: .9rem; font-weight: 700; }
+.sidebar a { padding: .8rem; border-radius: .65rem; color: #66574d; text-decoration: none; }
+.sidebar .active { background: #eadfd5; color: #55483e; font-weight: 700; }
+.content { min-width: 0; padding: 2.5rem; color: #55483e; }
+.titleRow { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.titleRow p { margin: 0; color: #a68d78; font-size: .9rem; font-weight: 700; }
+.titleRow h1 { margin: .4rem 0 0; font-size: clamp(2.5rem, 5vw, 4rem); }
+.titleRow button, .form button, .itemActions button { padding: .65rem .9rem; border: 0; border-radius: .6rem; background: #baa088; color: #fff; font: inherit; cursor: pointer; }
+.form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; padding: 1.5rem; border-radius: 1rem; background: #fbf9f6; }
+.form h2, .full, .check, .formActions { grid-column: 1 / -1; }
+.form h2 { margin: 0; }
+.form label { display: grid; gap: .4rem; color: #786b61; }
+.form input, .form textarea { width: 100%; min-width: 0; padding: .75rem; border: 1px solid #ded4cb; border-radius: .6rem; background: #fff; font: inherit; }
+.form textarea { min-height: 7rem; resize: vertical; }
+.check { display: flex !important; align-items: center; grid-template-columns: auto 1fr; }
+.check input { width: auto; }
+.formActions { display: flex; gap: .6rem; }
+.formActions button + button, .itemActions button + button { background: #eadfd5; color: #786656; }
+.error, .success { padding: .8rem; border-radius: .6rem; }
+.error { background: #fff0f0; color: #b43f3f; }
+.success { background: #f1f6ed; color: #56714b; }
+.productSection { margin-top: 2rem; }
+.listTitle { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.listTitle p { margin: 0; color: #a16f49; font-weight: 700; }
+.productList { display: grid; gap: .75rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+.productList li { display: grid; grid-template-columns: 4rem minmax(0, 1fr) auto auto auto auto; align-items: center; gap: 1rem; padding: .9rem; border: 1px solid #eee7e1; border-radius: .8rem; }
+.productList img { width: 4rem; height: 4rem; border-radius: .6rem; object-fit: cover; }
+.productList div:not(.itemActions) { display: grid; gap: .3rem; }
+.productList span { color: #887a70; }
+.productList b { color: #a16f49; }
+.itemActions { display: flex; gap: .4rem; }
+.stockStatus { padding: .35rem .55rem; border-radius: 999px; font-size: .82rem; font-weight: 700; white-space: nowrap; }
+.inStock { background: #edf5e9; color: #55704d !important; }
+.lowStock { background: #fff2d7; color: #9a641c !important; }
+.soldOut { background: #f7e4e4; color: #a23e3e !important; }
+.stockEditor { display: flex; align-items: center; gap: .35rem; color: #786b61; white-space: nowrap; }
+.stockEditor input { width: 4.5rem; padding: .55rem; border: 1px solid #ded4cb; border-radius: .5rem; font: inherit; }
+.pagination { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem; margin-top: 1.5rem; }
+.pagination button { min-width: 2.3rem; padding: .5rem .65rem; border: 1px solid #d8cabe; border-radius: .5rem; background: #fff; color: #725f50; cursor: pointer; }
+.pagination .currentPage { background: #baa088; color: #fff; }
+.pagination button:disabled { cursor: default; opacity: .4; }
+button:disabled { cursor: wait; opacity: .65; }
+@media (max-width: 800px) { .layout, .form { grid-template-columns: 1fr; } .form h2, .full, .check, .formActions { grid-column: auto; } .titleRow { flex-direction: column; } .productList li { grid-template-columns: 3.5rem 1fr; } .productList b, .stockStatus, .stockEditor, .itemActions { grid-column: 2; } }
+@media (max-width: 500px) { .page { width: calc(100% - 2rem); padding: 3rem 0 4rem; } .content, .sidebar { padding: 1.25rem; } .listTitle { align-items: flex-start; flex-direction: column; } }

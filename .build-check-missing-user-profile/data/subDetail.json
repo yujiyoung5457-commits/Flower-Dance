@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "name": "코티cotti 아기침대",
+    "image": "/img/happy-02.png",
+    "description": "포근한 잠자리를 위한 코티 아기침대입니다.\n부드러운 색감과 편안한 분위기로 아이 방에 자연스럽게 어울립니다.\n매일의 낮잠과 밤잠 시간을 더 따뜻하게 만들어 주세요.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 2,
+    "name": "동물친구 세트",
+    "image": "/img/happy-02.png",
+    "description": "아이의 상상 놀이를 채워 줄 동물친구 세트입니다.\n귀여운 디자인과 차분한 색감으로 놀이 공간을 꾸며 줍니다.\n손에 쥐고 역할 놀이를 즐기기 좋은 구성입니다.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 3,
+    "name": "이유식 식기세트",
+    "image": "/img/happy-02.png",
+    "description": "처음 이유식을 시작하는 아이를 위한 식기세트입니다.\n식사 시간에 필요한 구성품을 한 번에 준비할 수 있습니다.\n차분하고 사랑스러운 색감으로 식탁을 밝혀 주세요.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 4,
+    "name": "코티cotti 아기 옷",
+    "image": "/img/happy-02.png",
+    "description": "매일 편안하게 입기 좋은 코티 아기 옷입니다.\n부드러운 분위기의 컬러가 아이의 사랑스러움을 더해 줍니다.\n외출복과 실내복으로 자연스럽게 활용해 보세요.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 5,
+    "name": "뜨개 토끼 인형",
+    "image": "/img/happy-02.png",
+    "description": "포근한 촉감이 매력적인 뜨개 토끼 인형입니다.\n침대 옆이나 아이 방 한쪽에 두기 좋은 아늑한 소품입니다.\n아이에게는 다정한 놀이 친구가 되어 줍니다.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 6,
+    "name": "유기농 당근죽",
+    "image": "/img/happy-02.png",
+    "description": "부드럽고 담백하게 즐길 수 있는 유기농 당근죽입니다.\n간편하게 준비해 바쁜 식사 시간에도 활용할 수 있습니다.\n따뜻한 한 끼가 필요한 날 가볍게 꺼내 보세요.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 7,
+    "name": "포근 아기 침대",
+    "image": "/img/happy-02.png",
+    "description": "아이만의 편안한 휴식 공간을 만들어 주는 아기 침대입니다.\n포근한 톤의 디자인이 아이 방을 한층 더 따뜻하게 채워 줍니다.\n잠드는 순간부터 깨어나는 시간까지 곁을 지켜 주세요.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 8,
+    "name": "코티cotti 아기 신발",
+    "image": "/img/happy-02.png",
+    "description": "작은 발걸음을 사랑스럽게 완성해 줄 아기 신발입니다.\n리본 디테일과 부드러운 색감이 귀여운 포인트가 됩니다.\n외출하는 날의 코디에 가볍게 더해 보세요.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 9,
+    "name": "뜨개 코끼리 키링",
+    "image": "/img/happy-02.png",
+    "description": "가방이나 유모차에 달기 좋은 코끼리 키링입니다.\n손뜨개처럼 포근한 질감과 귀여운 표정이 돋보입니다.\n일상 소품에 작은 즐거움을 더해 주세요.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 10,
+    "name": "유기농 호박즙 5팩",
+    "image": "/img/happy-02.png",
+    "description": "달콤하고 부드러운 맛의 유기농 호박즙입니다.\n한 팩씩 간편하게 챙길 수 있어 외출할 때도 편리합니다.\n온 가족이 부담 없이 즐길 수 있는 데일리 음료입니다.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 11,
+    "name": "젖병 세트",
+    "image": "/img/happy-02.png",
+    "description": "수유 시간을 위한 실용적인 젖병 세트입니다.\n필요한 구성품을 함께 담아 처음 준비하는 분께도 좋습니다.\n차분한 디자인으로 육아 공간에 자연스럽게 어울립니다.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 12,
+    "name": "아기 손수건",
+    "image": "/img/happy-02.png",
+    "description": "매일 자주 손이 가는 부드러운 아기 손수건입니다.\n가볍게 접어 외출 가방에 넣어 두기 좋은 크기입니다.\n깔끔한 색감과 귀여운 포인트로 실용성을 더했습니다.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 13,
+    "name": "아기 공갈젖꼭지",
+    "image": "/img/happy-02.png",
+    "description": "아이의 편안한 순간을 위한 공갈젖꼭지입니다.\n부드러운 컬러와 단정한 디자인으로 깔끔하게 준비했습니다.\n외출용과 집에서 사용할 용도로 여유 있게 챙겨 보세요.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 14,
+    "name": "실리콘 아기 턱받이",
+    "image": "/img/happy-02.png",
+    "description": "식사 시간의 작은 흘림을 줄여 주는 아기 턱받이입니다.\n귀여운 디자인으로 이유식 시간이 한층 즐거워집니다.\n매일 쓰는 육아용품으로 편리하게 활용해 보세요.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  },
+  {
+    "id": 15,
+    "name": "순한 샴푸&바디워시",
+    "image": "/img/happy-02.png",
+    "description": "아이의 목욕 시간을 위한 순한 샴푸와 바디워시입니다.\n한 번의 사용으로 머리부터 몸까지 간편하게 관리할 수 있습니다.\n포근한 거품과 함께 편안한 목욕 시간을 만들어 주세요.",
+    "detailImages": ["/img/happy-01.png", "/img/happy-03.png", "/img/cotti-place01.png"]
+  }
+]

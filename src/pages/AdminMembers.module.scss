@@ -1,0 +1,16 @@
+.page { width: min(1200px, calc(100% - 32px)); min-height: 65vh; margin: 0 auto; padding: 5rem 0 7rem; }
+.layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: 1.25rem; }
+.sidebar, .content { border: 1px solid #e4dcd5; border-radius: 1.5rem; background: #fff; }
+.sidebar { display: grid; align-content: start; gap: .4rem; padding: 1.5rem; }
+.sidebar p { margin: 0 0 .7rem; color: #a68d78; font-size: .9rem; font-weight: 700; }
+.sidebar a { padding: .8rem; border-radius: .65rem; color: #66574d; text-decoration: none; }
+.sidebar .active { background: #eadfd5; color: #55483e; font-weight: 700; }
+.content { min-height: 31rem; padding: 2.5rem; color: #55483e; }
+.content > p:first-child { margin: 0; color: #a68d78; font-size: .9rem; font-weight: 700; }
+.content h1 { margin: .5rem 0 2rem; font-size: clamp(2.5rem, 5vw, 4rem); }
+.table { overflow: hidden; border: 1px solid #eee7e1; border-radius: .8rem; }
+.head, .row { display: grid; grid-template-columns: 1fr 1.6fr 1fr; gap: 1rem; padding: 1rem; }
+.head { background: #eadfd5; color: #66574d; }
+.row { border-top: 1px solid #eee7e1; color: #55483e; }
+.error { color: #b43f3f; }
+@media (max-width: 700px) { .page { width: calc(100% - 2rem); padding: 3rem 0 4rem; } .layout { grid-template-columns: 1fr; } .sidebar, .content { padding: 1.5rem; } .head, .row { grid-template-columns: 1fr; gap: .4rem; } }

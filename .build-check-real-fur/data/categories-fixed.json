@@ -1,0 +1,9 @@
+[
+  { "id": 1, "name": "전체보기", "path": "/products", "image": null },
+  { "id": 2, "name": "식기/주방", "path": "/products/category/kitchen", "image": "/img/pd-02.png" },
+  { "id": 3, "name": "의류/신발", "path": "/products/category/clothes", "image": "/img/pd-03.png" },
+  { "id": 4, "name": "인형", "path": "/products/category/doll", "image": "/img/pd-04.png" },
+  { "id": 5, "name": "이유식", "path": "/products/category/baby-food", "image": "/img/pd-05.png" },
+  { "id": 6, "name": "침구류", "path": "/products/category/bedding", "image": "/img/imgpd-03.png" },
+  { "id": 7, "name": "장난감", "path": "/products/category/toy", "image": "/img/pd-01.png" }
+]

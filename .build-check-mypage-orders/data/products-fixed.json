@@ -1,0 +1,18 @@
+[
+  { "id": 1, "name": "코티cotti 아기침대", "category": "침구류", "categoryValue": "keyboard", "price": 250000, "discountRate": 15, "image": "/img/imgpd-03.png" },
+  { "id": 2, "name": "동물친구 세트", "category": "장난감", "categoryValue": "keyboard", "price": 70000, "discountRate": 12, "image": "/img/pd-01.png" },
+  { "id": 3, "name": "이유식 식기세트", "category": "식기/주방", "categoryValue": "mouse", "price": 52000, "discountRate": 10, "image": "/img/pd-02.png" },
+  { "id": 4, "name": "코티cotti 아기 옷", "category": "의류/신발", "categoryValue": "mouse", "price": 77000, "discountRate": 5, "image": "/img/pd-03.png" },
+  { "id": 5, "name": "뜨개 토끼 인형", "category": "인형", "categoryValue": "monitor", "price": 32000, "discountRate": 20, "image": "/img/pd-04.png" },
+  { "id": 6, "name": "유기농 당근죽", "category": "이유식", "categoryValue": "laptop", "price": 20000, "discountRate": 8, "image": "/img/pd-05.png" },
+  { "id": 7, "name": "포근 아기 침대", "category": "침구류", "categoryValue": "speaker", "price": 590000, "discountRate": 15, "image": "/img/imgpd-03.png" },
+  { "id": 8, "name": "코티cotti 아기 신발", "category": "의류/신발", "categoryValue": "accessory", "price": 64000, "discountRate": 20, "image": "/img/shoose.png" },
+  { "id": 9, "name": "뜨개 코끼리 키링", "category": "인형", "categoryValue": "accessory", "price": 15000, "discountRate": 13, "image": "/img/ele.png" },
+  { "id": 10, "name": "유기농 호박즙 5팩", "category": "이유식", "categoryValue": "laptop", "price": 30000, "discountRate": 15, "image": "/img/pumk.png" },
+  { "id": 11, "name": "젖병 세트", "category": "식기/주방", "categoryValue": "laptop", "price": 25000, "discountRate": 15, "image": "/img/pd-08(bottle).png" },
+  { "id": 12, "name": "아기 손수건", "category": "의류/신발", "categoryValue": "laptop", "price": 16000, "discountRate": 30, "image": "/img/pd-09(nap).png" },
+  { "id": 13, "name": "아기 공갈젖꼭지", "category": "식기/주방", "categoryValue": "laptop", "price": 29000, "discountRate": 20, "image": "/img/pd-10(lip).png" },
+  { "id": 14, "name": "실리콘 아기 턱받이", "category": "식기/주방", "categoryValue": "laptop", "price": 17000, "discountRate": 15, "image": "/img/pd-11(tuk).png" },
+  { "id": 15, "name": "순한 샴푸&바디워시", "category": "식기/주방", "categoryValue": "laptop", "price": 29900, "discountRate": 8, "image": "/img/pd-12(shampoo).png" }
+ 
+]

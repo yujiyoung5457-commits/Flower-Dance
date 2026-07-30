@@ -1,0 +1,305 @@
+.header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  isolation: isolate;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/img/header.svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.header > * {
+  position: relative;
+  z-index: 1;
+}
+
+.inner {
+  width: min(1300px, calc(100% - 40px));
+  min-height: 6.8rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  // border: 1px solid red;
+  gap: 0rem;
+}
+
+.logo {
+  display: block;
+  width: 13rem;
+  height: 5rem;
+  margin: 0;
+  flex-shrink: 0;
+  background-image: url('/img/logo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.logo img {
+  display: block;
+  width: 100%;
+  height: 70px;
+  object-fit: contain;
+}
+
+.wrap {
+  display: flex;
+  margin-left: auto;
+  flex-direction: column;
+}
+.line{
+  width: min(1320px, calc(100% - 40px));
+  margin: 0.25rem auto 0;
+}
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.25rem;
+  white-space: nowrap;
+}
+
+.menu a {
+  color: #695c51;
+  font-size: clamp(1.05rem, 1.55vw, 1.55rem);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.userName,
+.logoutButton {
+  color: #695c51;
+  font-family: inherit;
+  font-size: clamp(1.05rem, 1.55vw, 1.55rem);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.logoutButton {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu a:hover {
+  color: #928745;
+  transform: translateY(-0.5rem);
+}
+
+hr {
+  color: #63574d;
+  border: none;
+  border: 1px solid #b49d8b;
+}
+
+.menuHide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.1rem, 2.2vw, 2.3rem);
+  padding: 1.25rem 1rem 2rem;
+  color: #746457;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  font-weight: bold;
+
+}
+.menuHide{
+  a{
+      &:hover{
+    color: #271c12;
+  }
+  }
+}
+
+.menuButton,
+.mobileMenu {
+  display: none;
+}
+
+// 태블릿: 헤더 요소가 겹치지 않도록 줄바꿈을 허용합니다.
+@media (max-width: 900px) {
+  .inner {
+    // padding:0 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .menu {
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+  }
+}
+
+// 모바일: 헤더를 3rem 높이로 줄이고, 일반 메뉴 대신 햄버거 메뉴를 사용합니다.
+@media (max-width: 768px) {
+  .inner {
+    width: calc(100% - 2rem);
+    min-height: 3rem;
+    height: 3rem;
+    justify-content: space-between;
+    z-index: 4;
+  }
+
+  .logo {
+    width: 8.5rem;
+    height: 2.2rem;
+    margin-top: 0;
+  }
+
+  .search,
+  .wrap,
+  .line,
+  .menuHide {
+    display: none;
+  }
+
+  .menuButton {
+    display: flex;
+    width: 2.4rem;
+    height: 2.4rem;
+    padding: 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.28rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    z-index: 4;
+
+    span {
+      display: block;
+      width: 1.25rem;
+      height: 2px;
+      background: #695c51;
+    }
+  }
+
+  .mobileMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    display: grid;
+    width: min(15.625rem, 67vw);
+    min-height: 100dvh;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 0.35rem 0.8rem;
+    padding: 4.4rem 1.25rem 1.5rem;
+    border: 0;
+    border-radius: 0;
+    background: #e0dcd1;
+    box-shadow: none;
+    animation: mobileMenuSlideIn 0.32s ease-out both;
+
+    a {
+      padding: 0.5rem 0;
+      color: #695c51;
+      font-size: 0.8rem;
+      text-align: left;
+      text-decoration: none;
+    }
+
+    a:nth-of-type(8) {
+      grid-column: 1 / -1;
+      margin-top: 0.65rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #9e9282;
+    }
+
+    .userName,
+    .logoutButton {
+      padding: 0.5rem 0;
+      font-size: 0.8rem;
+      text-align: left;
+    }
+  }
+}
+
+// 작은 모바일(420px 이하): 로고와 햄버거 버튼을 가까이 배치해 370px에서도 보이게 합니다.
+@media (max-width: 420px) {
+  .inner {
+    width: calc(100% - 1rem);
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .logo {
+    width: 7.2rem;
+  }
+
+  .menuButton {
+    margin-left: auto;
+  }
+
+  .mobileMenu {
+    width: min(15.625rem, 67vw);
+  }
+}
+
+@keyframes mobileMenuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobileMenuClosing {
+  animation: mobileMenuSlideOut 0.32s ease-in both !important;
+}
+
+@keyframes mobileMenuSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileMenu {
+    animation: none;
+  }
+}

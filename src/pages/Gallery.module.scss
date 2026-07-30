@@ -1,0 +1,170 @@
+.page{
+  width: min(1200px, calc(100% - 32px));
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: 4rem 0;
+  color: #302d2a;
+  h1{
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 45pt;
+  }
+}
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+.gallerySlider{
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+  touch-action: pan-y;
+  &::-webkit-scrollbar{
+    display: none;
+  }
+  &:active{
+    cursor: grabbing;
+  }
+  .card{
+    flex: 0 0 220px;
+    scroll-snap-align: start;
+  }
+}
+.personalGrid{
+  display: flex;
+  flex-wrap: wrap;
+  .card{
+    flex: 0 0 calc((100% - 7.5rem) / 6);
+  }
+}
+.pagination{
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.5rem;
+  button{
+    min-width: 2.3rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+    background: #9e9282;
+    color: #fff;
+    &:disabled{
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+  }
+}
+.activePage{
+  background: #756a60 !important;
+}
+.shared,
+.personal{
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border: 1px solid #9e9282;
+  border-radius: 22px;
+  h2{
+    margin-bottom: 0.5rem;
+  }
+  > p{
+    margin-bottom: 1.5rem;
+  }
+}
+.shared{
+  background: #f9f9e4;
+}
+.shareTitle{
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.personal{
+  background: #fff;
+}
+.card{
+  overflow: hidden;
+  border: 1px solid #9e9282;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 5px 14px rgba(80, 63, 46, 0.12);
+  img{
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+  p{
+    padding: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  input{
+    width: calc(100% - 2rem);
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #9e9282;
+    border-radius: 8px;
+  }
+}
+.cardActions{
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1rem 1rem;
+  button{
+    flex: 1;
+    padding: 0.45rem;
+    border-radius: 8px;
+    background: #8a7869;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+.empty{
+  text-align: center;
+}
+.back{
+  display: block;
+  width: fit-content;
+  margin: 2rem auto 0;
+  padding: 0.7rem 1.2rem;
+  border-radius: 14px;
+  background: #8a7869;
+  color: #fff;
+}
+
+@media (max-width: 600px){
+  .page{
+    width: calc(100% - 2rem);
+    padding: 2.5rem 0;
+  }
+  .page h1{
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+  .shared,
+  .personal{
+    padding: 1rem;
+  }
+  .personalGrid .card{
+    flex: 0 0 calc((100% - 1.5rem) / 2);
+  }
+}
+
+@media (max-width: 370px){
+  .personalGrid .card{
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .gallerySlider .card{
+    flex-basis: min(220px, calc(100vw - 4rem));
+  }
+  .pagination{
+    flex-wrap: wrap;
+  }
+}

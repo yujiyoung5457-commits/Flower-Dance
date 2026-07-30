@@ -1,0 +1,9 @@
+관리자 계정 설정 안내
+
+이메일: yujy0303@naver.com
+UID: bhD27taOUrXo5g1UDVDLUgCgj7O2
+Firestore 문서 경로: users/bhD27taOUrXo5g1UDVDLUgCgj7O2
+역할 필드: role = admin
+
+관리자 역할은 Firebase Console 또는 신뢰할 수 있는 서버 측 Admin SDK에서만 변경합니다.
+보안을 위해 비밀번호는 이 파일에 기록하지 않습니다.
