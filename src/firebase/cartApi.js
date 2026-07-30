@@ -9,6 +9,10 @@ import {
 } from 'firebase/firestore'
 import { db } from './firebase'
 
+const notifyCartChanged = () => {
+  window.dispatchEvent(new Event('shopping-cart-changed'))
+}
+
 const ensureCartApiConfigured = () => {
   if (db) return
 
@@ -30,6 +34,7 @@ const getUserCartItems = async (uid) => {
 const deleteUserCartItem = async (uid, itemId) => {
   ensureCartApiConfigured()
   await deleteDoc(doc(db, 'carts', uid, 'items', itemId))
+  notifyCartChanged()
 }
 
 const addUserCartItem = async (uid, product, quantity = 1) => {
@@ -62,6 +67,7 @@ const addUserCartItem = async (uid, product, quantity = 1) => {
       updatedAt: serverTimestamp(),
     }, { merge: true })
   })
+  notifyCartChanged()
 }
 
 const updateUserCartItemQuantity = async (uid, itemId, quantity) => {
@@ -70,6 +76,7 @@ const updateUserCartItemQuantity = async (uid, itemId, quantity) => {
     quantity,
     updatedAt: serverTimestamp(),
   })
+  notifyCartChanged()
 }
 
 const clearUserCart = async (uid) => {

@@ -139,7 +139,7 @@ const ProductDetail = () => {
     ))
     : [...cart, newItem] //새 아이템 추가
 
-  window.localStorage.setItem('cart',JSON.stringify(updateCart))
+  saveLocal('cart', updateCart)
   setIsInCart((current) => !current)
     
   }

@@ -116,6 +116,40 @@
   transform: translateY(-0.5rem);
 }
 
+.menu .cartLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: -0.65rem;
+}
+
+.cartLink img {
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -0.45rem;
+  right: -0.55rem;
+  display: grid;
+  min-width: 1.2rem;
+  height: 1.2rem;
+  padding: 0 0.22rem;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: #a64343;
+  color: #fff;
+  font-size: 0.67rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
 hr {
   color: #63574d;
   border: none;

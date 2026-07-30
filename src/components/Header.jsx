@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useAuthStore from '../store/authStore'
+import { getUserCartItems } from '../firebase/cartApi'
+import { loadLocal } from '../utils/localStorage'
 import SearchBox from './SearchBox'
 import styles from './Header.module.scss'
 
@@ -10,6 +12,35 @@ const Header = () => {
   const currentUser = useAuthStore((state) => state.user)
   const isAdmin = useAuthStore((state) => state.isAdmin)
   const logout = useAuthStore((state) => state.logout)
+  const [cartCount, setCartCount] = useState(0)
+
+  useEffect(() => {
+    let isActive = true
+
+    const updateCartCount = async () => {
+      if (!currentUser) {
+        const localCart = loadLocal('cart', [])
+        if (isActive) setCartCount(localCart.reduce((total, item) => total + Number(item.quantity || 1), 0))
+        return
+      }
+
+      try {
+        const cartItems = await getUserCartItems(currentUser.uid)
+        if (isActive) setCartCount(cartItems.reduce((total, item) => total + Number(item.quantity || 1), 0))
+      } catch {
+        if (isActive) setCartCount(0)
+      }
+    }
+
+    updateCartCount()
+    window.addEventListener('shopping-storage-changed', updateCartCount)
+    window.addEventListener('shopping-cart-changed', updateCartCount)
+    return () => {
+      isActive = false
+      window.removeEventListener('shopping-storage-changed', updateCartCount)
+      window.removeEventListener('shopping-cart-changed', updateCartCount)
+    }
+  }, [currentUser])
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false)
 
@@ -61,7 +92,10 @@ const Header = () => {
             {isAdmin && <Link to='/admin'>Admin</Link>}
             <Link to='/mypage'>MyPage</Link>
             <Link to='/wishlist'>WishList</Link>
-            <Link to='/cart'>Cart</Link>
+            <Link to='/cart' className={styles.cartLink} aria-label={`장바구니, 상품 ${cartCount}개`}>
+              <img src='/img/carticon.png' alt='' />
+              {cartCount > 0 && <span className={styles.cartBadge}>{cartCount > 99 ? '99+' : cartCount}</span>}
+            </Link>
             <Link to='/photozone'>PhotoZone</Link>
           </nav>
         </div>
