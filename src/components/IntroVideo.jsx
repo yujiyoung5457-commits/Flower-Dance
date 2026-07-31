@@ -42,6 +42,7 @@ const IntroVideo = ({ onFinish }) => {
         onEnded={onFinish}
         onError={onFinish}
       />
+      <button type='button' className={styles.skipButton} onClick={onFinish}>SKIP</button>
     </div>
   )
 }

@@ -32,6 +32,7 @@ const App = () => {
   const initializeAuth = useAuthStore((state) => state.initializeAuth)
   const [showIntro, setShowIntro] = useState(() => {
     try {
+      if (window.matchMedia('(max-width: 768px)').matches) return false
       return sessionStorage.getItem('introPlayed') !== 'true'
     } catch {
       return false
