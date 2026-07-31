@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import ProductList from '../components/ProductList'
 import styles from './SearchResult.module.scss'
+import { getProducts } from '../firebase/productApi'
 
 
 
@@ -12,16 +13,20 @@ const SearchResult = () => {
 
   useEffect(()=>{
     const searchP=async()=>{
-      const res=await fetch('/data/products-fixed.json')
-      const proData=await res.json()
-      const trimKeyword=keyword.toLowerCase().trim()
+      try {
+        const proData=await getProducts()
+        const trimKeyword=keyword.toLowerCase().trim()
 
-      const result = proData.filter((item)=>{
-          const productName=item.name.toLowerCase()
-          const productCategory=item.category.toLowerCase()
-        return productName.includes(trimKeyword) || productCategory.includes(trimKeyword)
-      })
-      setSearchRlt(result)
+        const result = proData.filter((item)=>{
+          const productName=String(item.name || '').toLowerCase()
+          const productCategory=String(item.category || '').toLowerCase()
+          return productName.includes(trimKeyword) || productCategory.includes(trimKeyword)
+        })
+        setSearchRlt(result)
+      } catch (error) {
+        console.error('검색 상품을 불러오지 못했습니다.', error)
+        setSearchRlt([])
+      }
     }
     searchP()
   },[keyword])
@@ -44,4 +49,3 @@ const SearchResult = () => {
 
 
 export default SearchResult
-
