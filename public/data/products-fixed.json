@@ -13,6 +13,7 @@
   { "id": 12, "name": "아기 손수건", "category": "의류/신발", "categoryValue": "laptop", "price": 16000, "discountRate": 30, "image": "/img/pd-09(nap).png" },
   { "id": 13, "name": "아기 공갈젖꼭지", "category": "식기/주방", "categoryValue": "laptop", "price": 29000, "discountRate": 20, "image": "/img/pd-10(lip).png" },
   { "id": 14, "name": "실리콘 아기 턱받이", "category": "식기/주방", "categoryValue": "laptop", "price": 17000, "discountRate": 15, "image": "/img/pd-11(tuk).png" },
-  { "id": 15, "name": "순한 샴푸&바디워시", "category": "식기/주방", "categoryValue": "laptop", "price": 29900, "discountRate": 8, "image": "/img/pd-12(shampoo).png" }
+  { "id": 15, "name": "순한 샴푸&바디워시", "category": "식기/주방", "categoryValue": "laptop", "price": 29900, "discountRate": 8, "image": "/img/pd-12(shampoo).png" },
+  { "id": 16, "name": "친환경 소재 포크", "category": "식기/주방", "categoryValue": "laptop", "price": 29900, "discountRate": 8, "image": "/img/new01.png" }
  
 ]

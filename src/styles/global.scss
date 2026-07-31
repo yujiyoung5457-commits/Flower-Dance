@@ -1,3 +1,5 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
 @font-face {
   font-family: 'Shopping Mall';
   src: url('../assets/fonts/Cafe24Behappy.ttf') format('truetype');
@@ -36,6 +38,15 @@ body,
 #root {
   max-width: 100%;
   overflow-x: hidden;
+}
+
+.admin-surface,
+.admin-surface button,
+.admin-surface input,
+.admin-surface textarea,
+.admin-surface select {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: normal;
 }
 
 body::before {

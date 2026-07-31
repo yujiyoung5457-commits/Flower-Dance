@@ -92,7 +92,7 @@ const AdminNotices = () => {
         <section className={styles.productSection}>
           <h2>공지사항 {notices.length}개</h2>
           {isLoading ? <p>불러오는 중입니다...</p> : notices.length === 0 ? <p>등록된 공지사항이 없습니다.</p> : <>
-            <ul className={styles.productList}>{pageNotices.map((notice) => <li key={notice.id}><div><strong>{notice.title}</strong><span>{notice.updateAt?.toDate?.().toLocaleString('ko-KR') || '저장 중'}</span></div><div className={styles.itemActions}><button onClick={() => startEdit(notice)}>수정</button><button onClick={() => deleteNotice(notice)}>삭제</button></div></li>)}</ul>
+            <ul className={styles.noticeList}>{pageNotices.map((notice) => <li key={notice.id}><div><strong>{notice.title}</strong><span>{notice.updateAt?.toDate?.().toLocaleString('ko-KR') || '저장 중'}</span></div><div className={styles.itemActions}><button onClick={() => startEdit(notice)}>수정</button><button onClick={() => deleteNotice(notice)}>삭제</button></div></li>)}</ul>
             <nav className={styles.pagination}>
               <button onClick={() => setPage(1)} disabled={page === 1}>«</button><button onClick={() => setPage((value) => Math.max(1, value - 1))} disabled={page === 1}>‹</button>
               {Array.from({ length: totalPages }, (_, index) => index + 1).map((number) => <button key={number} className={page === number ? styles.currentPage : ''} onClick={() => setPage(number)}>{number}</button>)}

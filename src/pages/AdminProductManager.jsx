@@ -8,6 +8,7 @@ import {
   updateProductRecommendation,
   updateProductStock,
 } from '../firebase/productApi'
+import { uploadProductImage } from '../firebase/storageApi'
 import styles from './AdminProductManager.module.scss'
 
 const PAGE_SIZE = 10
@@ -44,6 +45,7 @@ const AdminProductManager = () => {
   const [recommendSavingId, setRecommendSavingId] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
+  const [selectedImage, setSelectedImage] = useState(null)
 
   const loadProducts = useCallback(async () => {
     setIsLoading(true)
@@ -73,7 +75,12 @@ const AdminProductManager = () => {
     setForm((previous) => ({ ...previous, [name]: type === 'checkbox' ? checked : value }))
   }
 
-  const resetForm = () => { setForm(EMPTY_FORM); setEditingId('') }
+  const resetForm = () => { setForm(EMPTY_FORM); setEditingId(''); setSelectedImage(null) }
+
+  const selectImage = (event) => {
+    const file = event.target.files?.[0] || null
+    setSelectedImage(file)
+  }
 
   const submitProduct = async (event) => {
     event.preventDefault()
@@ -83,11 +90,16 @@ const AdminProductManager = () => {
       setError(`추천상품은 최대 ${MAX_RECOMMENDED_PRODUCTS}개까지만 설정할 수 있습니다.`)
       return
     }
+    if (!form.image && !selectedImage) {
+      setError('상품 이미지를 선택해 주세요.')
+      return
+    }
     setBusy(true); setError(''); setMessage('')
     try {
-      await saveProduct(form, editingId || undefined)
+      const image = selectedImage ? await uploadProductImage(selectedImage) : form.image
+      await saveProduct({ ...form, image }, editingId || undefined)
       setMessage(editingId ? '상품을 수정했습니다.' : '상품을 등록했습니다.')
-      resetForm()
+      resetForm(); setSelectedImage(null)
       await loadProducts()
     } catch (saveError) {
       setError(koreanError(saveError, editingId ? '상품 수정' : '상품 등록'))
@@ -103,6 +115,7 @@ const AdminProductManager = () => {
       lowStockThreshold: String(product.lowStockThreshold ?? 5), image: product.image || '',
       description: product.description || '', isRecommended: Boolean(product.isRecommended),
     })
+    setSelectedImage(null)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -187,7 +200,10 @@ const AdminProductManager = () => {
             <label>할인률<input name='discountRate' type='number' min='0' max='100' value={form.discountRate} onChange={updateField} /></label>
             <label>재고<input name='stock' type='number' min='0' step='1' value={form.stock} onChange={updateField} required /></label>
             <label>품절 임박 기준<input name='lowStockThreshold' type='number' min='0' step='1' value={form.lowStockThreshold} onChange={updateField} required /></label>
-            <label className={styles.full}>이미지 경로 또는 URL<input name='image' value={form.image} onChange={updateField} required /></label>
+            <label className={styles.full}>상품 이미지
+              <input type='file' accept='image/*,.jfif,.jiff' onChange={selectImage} required={!editingId && !form.image} />
+              <span className={styles.fileHint}>{selectedImage ? selectedImage.name : form.image ? '기존 이미지 유지' : '데스크톱에서 이미지 파일을 선택해 주세요.'}</span>
+            </label>
             <label className={styles.full}>설명<textarea name='description' value={form.description} onChange={updateField} required /></label>
             <label className={styles.check}><input name='isRecommended' type='checkbox' checked={form.isRecommended} onChange={updateField} />추천상품으로 표시</label>
             <div className={styles.formActions}>
