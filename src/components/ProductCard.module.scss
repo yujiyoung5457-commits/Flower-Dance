@@ -159,12 +159,29 @@
     }
 
     .txtwrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
       padding: 0.65rem 0.7rem;
 
       p { font-size: 0.78rem; }
+      p,
+      .Main { grid-column: 1 / -1; }
       .Main { font-size: 0.95rem; }
-      .middle { font-size: 1.05rem; }
-      .price { font-size: 1.35rem; }
+      .middle {
+        grid-column: 2;
+        grid-row: 3;
+        align-self: end;
+        color: #943f3f;
+        font-size: 0.72rem;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+      .price {
+        grid-column: 1;
+        grid-row: 3;
+        margin-top: 0;
+        font-size: 1.35rem;
+      }
     }
 
     .wishButton {
