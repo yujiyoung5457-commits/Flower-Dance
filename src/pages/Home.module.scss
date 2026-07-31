@@ -33,7 +33,7 @@
 
 .specialPopup {
   top: 3.5rem;
-  left: max(20rem, calc((100vw - 680px) / 2));
+  left: calc(50% - 17.5rem);
   width: min(24vw, 17.5rem);
   transform: scale(1.2);
   transform-origin: top left;
@@ -93,6 +93,32 @@
     left: auto;
     width: min(52vw, 14rem);
     transform-origin: top right;
+  }
+}
+
+@media (max-width: 768px) {
+  .section1,
+  .section2,
+  .imgBox4,
+  .article1,
+  .article2 {
+    margin: 3rem auto;
+  }
+
+  .article1 .articleText,
+  .article2 .articleText {
+    margin: 0;
+    padding-top: 0;
+  }
+
+  .article1 .articleText p,
+  .article2 .articleText p {
+    margin-bottom: 1.5rem;
+  }
+
+  .article1 .articleText span,
+  .article2 .articleText span {
+    margin-top: 1.5rem;
   }
 }
 

@@ -12,6 +12,20 @@ const Products = () => {
   const [product, setProduct]=useState([])
   const [priceRange, setPriceRange]=useState('all')
   const [sortType, setSortType]=useState('latest')
+  const [lastSlideIndex, setLastSlideIndex] = useState(0)
+  const lastSlideImages = [
+    '/img/cotti-plush13.png',
+    '/img/cotti-plush14.png',
+    '/img/cotti-plush14-1.png',
+  ]
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setLastSlideIndex((current) => (current + 1) % lastSlideImages.length)
+    }, 3500)
+
+    return () => window.clearInterval(timer)
+  }, [lastSlideImages.length])
 
   useEffect(()=>{
     // 관리자 재고 변경이 상품 목록에도 새로고침 없이 즉시 반영됩니다.
@@ -81,8 +95,15 @@ const Products = () => {
       <ProductList products={sortItem} priceRange={priceRange} setPriceRange={priceRange}/>
 
       <section className={styles.lastSection}>
-        <br /><br /><br />
-          <img src="/img/cotti-plush13.png" alt="cotti" />
+        {lastSlideImages.map((image, index) => (
+          <img
+            key={image}
+            src={image}
+            alt={index === lastSlideIndex ? '코티 프로모션' : ''}
+            aria-hidden={index !== lastSlideIndex}
+            className={index === lastSlideIndex ? styles.activeLastSlide : ''}
+          />
+        ))}
       </section>
     </section>
   )

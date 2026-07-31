@@ -23,6 +23,37 @@
   }
 }
 
+.lastSection {
+  position: relative;
+  width: min(1200px, calc(100% - 2rem));
+  aspect-ratio: 16 / 6;
+  margin: 5rem auto;
+  overflow: hidden;
+  border-radius: 1.5rem;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+}
+
+.activeLastSlide {
+  opacity: 1 !important;
+}
+
+@media (max-width: 768px) {
+  .lastSection {
+    aspect-ratio: 4 / 3;
+    margin: 3rem auto;
+    border-radius: 1rem;
+  }
+}
+
 @media (max-width: 399px) {
   .titleArea img {
     display: none;
