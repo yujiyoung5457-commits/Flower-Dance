@@ -6,6 +6,7 @@ import {
   getPhotozoneArtworks,
   updatePhotozoneArtwork,
 } from '../utils/photozoneGalleryStorage'
+import { subscribeAuthState } from '../firebase/authApi'
 
 const truncateMessage = (message) => {
   if (!message) return '작성한 메시지가 없습니다.'
@@ -25,6 +26,7 @@ const Gallery = () => {
   const [editingId, setEditingId] = useState(null)
   const [editingMessage, setEditingMessage] = useState('')
   const [personalPage, setPersonalPage] = useState(1)
+  const [currentUser, setCurrentUser] = useState(null)
   const galleryDragRef = useRef(null)
   const personalPageSize = 12
   const totalPersonalPages = Math.max(1, Math.ceil(galleryItems.length / personalPageSize))
@@ -33,6 +35,8 @@ const Gallery = () => {
     (activePersonalPage - 1) * personalPageSize,
     activePersonalPage * personalPageSize,
   )
+
+  useEffect(() => subscribeAuthState(setCurrentUser), [])
 
   useEffect(() => {
     Promise.all([getPhotozoneArtworks(), getPhotozoneArtworks(true)])
@@ -105,7 +109,7 @@ const Gallery = () => {
         </div>
         {sharedItems.length === 0 && <p className={styles.empty}>아직 공유된 사진이 없습니다.</p>}
       </section>
-      <section className={styles.personal}>
+      {currentUser && <section className={styles.personal}>
         <h2>나의 사진 보관함</h2>
       <section className={`${styles.grid} ${styles.personalGrid}`}>
         {visibleGalleryItems.map((item) => (
@@ -146,7 +150,7 @@ const Gallery = () => {
           <button type='button' onClick={() => setPersonalPage((page) => Math.min(totalPersonalPages, page + 1))} disabled={activePersonalPage === totalPersonalPages}>&gt;&gt;</button>
         </nav>
       )}
-      </section>
+      </section>}
       <Link to='/photozone' className={styles.back}>Photozone으로 돌아가기</Link>
     </main>
   )
