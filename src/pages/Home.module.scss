@@ -710,6 +710,42 @@
 .last{
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .section1,
+  .section2,
+  .imgBox4,
+  .article1,
+  .article2 {
+    margin: 3rem auto;
+  }
+
+  .article1 .articleText,
+  .article2 .articleText {
+    min-height: 0;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .article1 .articleText p,
+  .article2 .articleText p {
+    margin-bottom: 1.25rem;
+  }
+
+  .article1 .articleText span,
+  .article2 .articleText span {
+    margin-top: 1.25rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .section1 .txtBox {
+    gap: 1.25rem;
+
+    h1 { font-size: clamp(1.7rem, 8vw, 2.25rem); }
+    span { font-size: 1.15rem; line-height: 1.55; }
+  }
+}
 .back{
   img{
     position: absolute;
