@@ -1,0 +1,30 @@
+.buttons {
+  position: fixed;
+  right: clamp(1rem, 3vw, 3rem);
+  bottom: clamp(1rem, 3vw, 4rem);
+  z-index: 9000;
+  display: grid;
+  gap: 0.55rem;
+
+  button {
+    display: grid;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: #8d7a68;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 0.25rem 0.75rem rgba(55, 43, 33, 0.2);
+  }
+
+  button:last-child { font-size: 1.1rem; }
+}
+
+@media (max-width: 768px) {
+  .buttons { right: 1rem; bottom: 1.25rem; }
+  .buttons button { width: 2.65rem; height: 2.65rem; font-size: 0.68rem; }
+}

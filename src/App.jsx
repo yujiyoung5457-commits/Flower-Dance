@@ -26,6 +26,7 @@ import AdminProducts from './pages/AdminProductManager'
 import AdminRecommended from './pages/AdminRecommended'
 import AdminNotices from './pages/AdminNotices'
 import LoadMap from './pages/LoadMap'
+import ScrollButtons from './components/ScrollButtons'
 import useAuthStore from './store/authStore'
 
 const App = () => {
@@ -87,6 +88,7 @@ const App = () => {
       </Routes>
       <br /><br /><br /><br />
       <Footer />
+      <ScrollButtons />
     </BrowserRouter>
   )
 }

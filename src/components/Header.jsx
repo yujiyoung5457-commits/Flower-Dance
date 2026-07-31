@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useAuthStore from '../store/authStore'
 import { getUserCartItems } from '../firebase/cartApi'
@@ -13,6 +13,23 @@ const Header = () => {
   const isAdmin = useAuthStore((state) => state.isAdmin)
   const logout = useAuthStore((state) => state.logout)
   const [cartCount, setCartCount] = useState(0)
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false)
+  const lastScrollY = useRef(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth > 768) return
+
+      const currentScrollY = window.scrollY
+      const difference = currentScrollY - lastScrollY.current
+      if (currentScrollY < 8 || difference < -6) setIsHeaderHidden(false)
+      else if (difference > 6) setIsHeaderHidden(true)
+      lastScrollY.current = currentScrollY
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     let isActive = true
@@ -80,7 +97,7 @@ const Header = () => {
   )
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isHeaderHidden ? styles.headerHidden : ''}`}>
       <div className={styles.inner}>
         <Link to='/' className={styles.logo} />
 

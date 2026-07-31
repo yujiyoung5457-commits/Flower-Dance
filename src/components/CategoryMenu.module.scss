@@ -105,7 +105,7 @@
 }
 
 // 모바일: 카테고리를 2열로 내려 한 항목의 터치 영역을 확보합니다.
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .categoryMenu {
     width: calc(100% - 2rem);
     margin: 4rem auto;
