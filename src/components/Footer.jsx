@@ -13,10 +13,10 @@ const Footer = () => {
             <h2><strong>플라워 댄스가 만듭니다.</strong></h2>
           </div>
           <div className={styles.two}>
-            <Link to="/products">전체상품</Link>
-            <Link to="/loadmap">오시는길</Link>
-            <Link to="/products">학생 포트폴리오</Link>
-            <Link to="/products">비상업적 포폴입니다</Link>
+            <Link to='/products'>전체상품</Link>
+            <Link to='/loadmap'>오시는길</Link>
+            <Link to='/products'>학생 포트폴리오</Link>
+            <Link to='/products'>비상업적 포폴입니다</Link>
           </div>
             <br /><br />
           <div className={styles.three}>
