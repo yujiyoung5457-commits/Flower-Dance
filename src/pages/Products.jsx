@@ -83,8 +83,6 @@ const Products = () => {
       <section className={styles.lastSection}>
         <br /><br /><br />
           <img src="/img/cotti-plush13.png" alt="cotti" />
-          <br /><br /><br />
-          <img src="/img/cotti-plush14.png" alt="cotti" />
       </section>
     </section>
   )
