@@ -98,8 +98,13 @@ const ProductCard = ({ product, onWishItem }) => {
     }
     if (currentUser) {
       try {
-        if (!isInCart) await addUserCartItem(currentUser.uid, product, 1)
-        setIsInCart(true)
+        if (isInCart) {
+          await deleteUserCartItem(currentUser.uid, product.id)
+          setIsInCart(false)
+        } else {
+          await addUserCartItem(currentUser.uid, product, 1)
+          setIsInCart(true)
+        }
       } catch (error) {
         console.error('장바구니를 저장하지 못했습니다.', error)
         window.alert(
@@ -114,11 +119,11 @@ const ProductCard = ({ product, onWishItem }) => {
     const cart = loadLocal('cart', [])
     const isAlreadyInCart = cart.some((item) => String(item.id) === String(product.id))
     const nextCart = isAlreadyInCart
-      ? cart
+      ? cart.filter((item) => String(item.id) !== String(product.id))
       : [...cart, { ...product, price: disPrice, quantity: 1 }]
 
     saveLocal('cart', nextCart)
-    setIsInCart(true)
+    setIsInCart(!isAlreadyInCart)
   }
 
   const orderNow = () => {
