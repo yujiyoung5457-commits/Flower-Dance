@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '@google/model-viewer'
 import { DELIVERY_MINIMUM } from '../constants/delivery'
 import { subscribeAuthState } from '../firebase/authApi'
@@ -15,6 +16,7 @@ import { getProducts } from '../firebase/productApi'
 import OrderSummary from '../components/OrderSummary' // component 오타 수정 체크!
 
 const Cart = () => {
+  const navigate = useNavigate()
   // useState 게으른 초기화 사용
   const [cartItem, setCartItem] = useState(() => loadLocal('cart', []))
   const [currentUser, setCurrentUser] = useState(null)
@@ -123,7 +125,14 @@ const Cart = () => {
   const deliveryFree = currentSubTotal >= DELIVERY_MINIMUM ? 0 : 3000
   const totalPrice = currentSubTotal + deliveryFree
 
-  const orderCart = () => {}
+  const orderCart = () => {
+    const paymentItems = cartItem.map((item) => ({
+      ...item,
+      price: getDisPrice(item),
+      discountRate: 0,
+    }))
+    navigate('/pay', { state: { items: paymentItems } })
+  }
 
   return (
     <section className={styles.section}>
