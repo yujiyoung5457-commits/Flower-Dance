@@ -6,6 +6,12 @@
   isolation: isolate;
 }
 
+@media (max-width: 768px) {
+  .header {
+    z-index: 200;
+  }
+}
+
 .header::before {
   content: '';
   position: absolute;
@@ -203,7 +209,7 @@ hr {
     min-height: 3rem;
     height: 3rem;
     justify-content: space-between;
-    z-index: 4;
+    z-index: 6;
   }
 
   .logo {
@@ -234,6 +240,7 @@ hr {
     cursor: pointer;
     position: relative;
     z-index: 4;
+    pointer-events: auto;
 
     span {
       display: block;
@@ -247,7 +254,7 @@ hr {
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 3;
+    z-index: 5;
     display: grid;
     width: min(15.625rem, 67vw);
     min-height: 100dvh;

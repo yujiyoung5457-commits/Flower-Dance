@@ -62,9 +62,41 @@ const COTTI_COLOR_FILTER = [
   getTemperatureFilter(COTTI_TEMPERATURE),
 ].join(' ')
 
+const POPUP_STORAGE_PREFIX = 'flower-dance-popup-hidden-'
+
+const getToday = () => {
+  const today = new Date()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+  return `${today.getFullYear()}-${month}-${day}`
+}
+
+const isPopupVisible = (popupId) => {
+  try {
+    return localStorage.getItem(`${POPUP_STORAGE_PREFIX}${popupId}`) !== getToday()
+  } catch {
+    return true
+  }
+}
+
 const Home = () => {
   const [homeProps, setHomeProps]=useState([])
+  const [visiblePopups, setVisiblePopups] = useState(() => ({
+    sale: isPopupVisible('sale'),
+    special: isPopupVisible('special'),
+  }))
   const homeContentRef = useRef(null)
+
+  const closePopup = (popupId, hideForToday = false) => {
+    if (hideForToday) {
+      try {
+        localStorage.setItem(`${POPUP_STORAGE_PREFIX}${popupId}`, getToday())
+      } catch {
+        // Storage can be unavailable in private browsing mode.
+      }
+    }
+    setVisiblePopups((current) => ({ ...current, [popupId]: false }))
+  }
   useEffect(()=>{
     // Firestore 변경을 실시간 구독하여 관리자 재고 수정이 홈에도 즉시 반영됩니다.
     const unsubscribe = subscribeProducts((productsData) => {
@@ -138,6 +170,32 @@ const Home = () => {
   }, [homeProps])
   return (
     <div ref={homeContentRef}>
+      {(visiblePopups.sale || visiblePopups.special) && (
+        <div className={styles.popupLayer} role='dialog' aria-label='프로모션 안내'>
+          {visiblePopups.sale && (
+            <section className={`${styles.popup} ${styles.salePopup}`}>
+              <img src='/img/pop-up2.png' alt='아이옷 30% 세일' />
+              <div className={styles.popupControls}>
+                <button type='button' onClick={() => closePopup('sale', true)}>오늘하루 그만보기</button>
+                <button type='button' className={styles.closePopupButton} onClick={() => closePopup('sale')}>
+                  닫기 <span aria-hidden='true'>×</span>
+                </button>
+              </div>
+            </section>
+          )}
+          {visiblePopups.special && (
+            <section className={`${styles.popup} ${styles.specialPopup}`}>
+              <img src='/img/pop-up.png' alt='첫영 세트 특가' />
+              <div className={styles.popupControls}>
+                <button type='button' onClick={() => closePopup('special', true)}>오늘하루 그만보기</button>
+                <button type='button' className={styles.closePopupButton} onClick={() => closePopup('special')}>
+                  닫기 <span aria-hidden='true'>×</span>
+                </button>
+              </div>
+            </section>
+          )}
+        </div>
+      )}
       <MainBanner />
       <CategoryMenu />
       <strong className={styles.our}>Our Picks</strong>
@@ -220,7 +278,8 @@ const Home = () => {
       <article className={styles.article2}>
         <div className={styles.articleText}>
           <p>“옥수수 전분에서 추출한 순수 식물성 PLA 소재”</p>
-          <strong>옥수수 전분에서 추출한<br />PLA 소재를<br />친환경 이유식 식기,<br />치기 좋고 스푼·포크 등<br />아이의 입에 닿는 모든 것에..!</strong>
+          <strong>옥수수 전분에서 추출한<br />PLA 소재를<br />친환경 이유식 식기,<br />자기주도 스푼/포크 등<br />
+아이의 입에 닿는 모든 것에..!</strong>
           <span>옥수수 전분 추출 starch(천분)에서 추출한 100% 식물성 소재입니다.<br />미세플라스틱이나 독성 물질 걱정이 없고<br />물에 묻어 간단히 헹궈도 깨끗이 잘 헹궈집니다.</span>
         </div>
         <img src="/img/cotti-plush17.png" alt="침대 위의 코티" />

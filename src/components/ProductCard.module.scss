@@ -151,16 +151,39 @@
 // 모바일: 카드 이미지를 낮추고 텍스트를 읽기 좋은 크기로 조정합니다.
 @media (max-width: 560px) {
   .card {
+    border-radius: 1rem;
+    padding-bottom: 0.7rem;
+
     .imageWrap {
-      height: 14rem;
+      height: clamp(8.5rem, 46vw, 11rem);
     }
 
     .txtwrap {
-      padding: 1rem;
+      padding: 0.65rem 0.7rem;
 
-      p { font-size: 1rem; }
-      .Main { font-size: 1.2rem; }
-      .middle { font-size: 1.45rem; }
+      p { font-size: 0.78rem; }
+      .Main { font-size: 0.95rem; }
+      .middle { font-size: 1.05rem; }
+      .price { font-size: 1.35rem; }
+    }
+
+    .wishButton {
+      top: 0.55rem;
+      right: 0.55rem;
+      width: 2.2rem;
+      height: 2.2rem;
+
+      h2 { font-size: 1.55rem; }
+    }
+
+    .actions {
+      width: calc(100% - 1rem);
+      gap: 0.4rem;
+    }
+
+    .actions button {
+      height: 2.2rem;
+      font-size: 0.82rem;
     }
   }
 }
