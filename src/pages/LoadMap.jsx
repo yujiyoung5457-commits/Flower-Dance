@@ -57,7 +57,7 @@ const LoadMap = () => {
           const marker = new kakao.maps.Marker({ position })
           marker.setMap(map)
           const infoWindow = new kakao.maps.InfoWindow({
-            content: `<div style="padding:10px 14px;min-width:190px;font-size:13px;line-height:1.5;"><strong>${STORE_NAME}</strong><br/>${STORE_ADDRESS}</div>`,
+            content: `<div style="padding:10px 14px;min-width:240px;font-size:13px;line-height:1.5; border-radius:15px;"><strong>${STORE_NAME}</strong><br/>${STORE_ADDRESS}</div>`,
           })
           infoWindow.open(map, marker)
         })
