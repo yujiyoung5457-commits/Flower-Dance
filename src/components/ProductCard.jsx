@@ -100,7 +100,6 @@ const ProductCard = ({ product, onWishItem }) => {
       try {
         if (!isInCart) await addUserCartItem(currentUser.uid, product, 1)
         setIsInCart(true)
-        navigate('/cart')
       } catch (error) {
         console.error('장바구니를 저장하지 못했습니다.', error)
         window.alert(
@@ -120,7 +119,6 @@ const ProductCard = ({ product, onWishItem }) => {
 
     saveLocal('cart', nextCart)
     setIsInCart(true)
-    navigate('/cart')
   }
 
   const orderNow = () => {
@@ -165,7 +163,7 @@ const ProductCard = ({ product, onWishItem }) => {
       {isLowStock && <span className={styles.lowStock}>품절 임박 · {product.stock}개 남음</span>}
       <div className={styles.actions}>
         <button className={isInCart ? styles.inCart : ''} onClick={changeCart} disabled={isSoldOut && !isInCart}>
-          장바구니
+          {isInCart ? '담겼어요🍰' : '장바구니'}
         </button>
         <button onClick={orderNow}>바로 주문하기</button>
       </div>
