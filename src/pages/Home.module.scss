@@ -777,3 +777,9 @@
      top: 162rem;
   }
 }
+
+@media (max-width: 768px) {
+  .back {
+    display: none;
+  }
+}
