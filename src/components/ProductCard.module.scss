@@ -121,7 +121,9 @@
   text-align: center;
   transition: background-color 0.2s, transform 0.2s;
 }
-
+.middle{
+  color: #943f3f;
+}
 .card .actions button:hover,
 .card .actions button.inCart {
   background: #4d4339;
