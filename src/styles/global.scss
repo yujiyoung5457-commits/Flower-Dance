@@ -30,6 +30,29 @@ body {
   margin: 0;
   font-family: inherit;
 }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.18;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  body::before {
+    background-position: left -7rem top 20rem, right -8rem top 45rem, left -5rem bottom 5rem;
+    background-size: 15rem, 14rem, 13rem;
+    opacity: 0.13;
+  }
+}
 ::-webkit-scrollbar{
   display: none;
 }

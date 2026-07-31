@@ -243,6 +243,14 @@ const Home = () => {
             <span>낮잠과 당근죽을 사랑하는 완벽한 토끼지만,<br /> 다들 강아지로 오해하는 통에 365일 볼이 시무룩하게 부풀어 있습니다.</span>
             <span>억울함이 묻어나는 저 표정, 실은 진짜 토끼랍니다!</span>
         </div>
+
+        <div className={styles.back}>
+          <img src="/img/background01.png" alt="배경의 무늬" />
+          <img src="/img/background02.png" alt="배경의 무늬" />
+          <img src="/img/background03.png" alt="배경의 무늬" />
+          <img src="/img/background04.png" alt="배경의 무늬" />
+          <img src="/img/background05.png" alt="배경의 무늬" />
+        </div>
       </section>
 
       <section className={styles.section2}>

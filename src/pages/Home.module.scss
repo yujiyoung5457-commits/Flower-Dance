@@ -710,3 +710,34 @@
 .last{
   width: 100%;
 }
+.back{
+  img{
+    position: absolute;
+    z-index: -999;
+  }
+  img:nth-child(1){
+    width: 30%;
+      left: 1rem;
+  }
+  img:nth-child(2){
+    width: 20%;
+      right: 1rem;
+      top: 152rem;
+  }
+  img:nth-child(3){
+    width: 26%;
+      right: 1rem;
+      top: 190rem;
+  }
+  img:nth-child(4){
+    width: 26%;
+      left: 3rem;
+     top: 152rem;
+     transform: rotate(10deg);
+  }
+   img:nth-child(5){
+    width: 37%;
+      left: 60rem;
+     top: 162rem;
+  }
+}
