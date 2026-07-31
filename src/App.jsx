@@ -26,6 +26,7 @@ import AdminProducts from './pages/AdminProductManager'
 import AdminRecommended from './pages/AdminRecommended'
 import AdminNotices from './pages/AdminNotices'
 import LoadMap from './pages/LoadMap'
+import Pay from './pages/Pay'
 import ScrollButtons from './components/ScrollButtons'
 import useAuthStore from './store/authStore'
 
@@ -71,6 +72,7 @@ const App = () => {
         <Route path='/photozone' element={<Photozone />} />
         <Route path='/gallery' element={<Gallery />} />
         <Route path='/order' element={<Order />} />
+        <Route path='/pay' element={<Pay />} />
         <Route path='/mypage' element={<ProtectedRoute><MyPage /></ProtectedRoute>} />
         <Route path='/admin' element={<AdminRoute><Admin /></AdminRoute>} />
         <Route path='/admin/members' element={<AdminRoute><AdminMembers /></AdminRoute>} />

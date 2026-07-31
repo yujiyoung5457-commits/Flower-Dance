@@ -1,5 +1,5 @@
 import React,{useEffect, useRef, useState} from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import styles from './ProductDetail.module.scss'
 import QuantityControl from '../components/QuantityControl'
 import { loadLocal, saveLocal } from '../utils/localStorage'
@@ -9,6 +9,7 @@ import { getProduct } from '../firebase/productApi'
 
 const ProductDetail = () => {
   const {id} =useParams()
+  const navigate = useNavigate()
   const [product, setProduct]=useState(null)
   const [subDetail, setSubDetail]=useState(null)
   const [isLoading, setIsLoading]=useState(true)
@@ -144,30 +145,12 @@ const ProductDetail = () => {
     
   }
 
-  const orderNow = async () => {
+  const orderNow = () => {
     if (isSoldOut) {
       window.alert('품절된 상품은 구매할 수 없습니다.')
       return
     }
-    if (currentUser) {
-      try {
-        if (!isInCart) await addUserCartItem(currentUser.uid, product, quantity)
-        setIsInCart(true)
-        window.location.assign('/cart')
-      } catch (error) {
-        console.error('바로구매를 진행하지 못했습니다.', error)
-        window.alert(
-          error?.code === 'permission-denied' || error?.code === 'firestore/permission-denied'
-            ? '장바구니 저장 권한이 없습니다. Firestore 보안 규칙을 확인해 주세요.'
-            : error?.message || '바로구매를 진행하지 못했습니다.',
-        )
-      }
-      return
-    }
-    const cart = loadLocal('cart', [])
-    const exists = cart.some((item) => String(item.id) === String(product.id))
-    if (!exists) saveLocal('cart', [...cart, { ...product, price: discountPrice, quantity }])
-    window.location.assign('/cart')
+    navigate('/pay', { state: { items: [{ ...product, quantity }] } })
   }
   return (
     <div className={styles.middle}>

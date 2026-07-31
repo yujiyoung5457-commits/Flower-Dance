@@ -123,40 +123,13 @@ const ProductCard = ({ product, onWishItem }) => {
     navigate('/cart')
   }
 
-  const orderNow = async () => {
+  const orderNow = () => {
   if (isSoldOut) {
     window.alert('품절된 상품은 구매할 수 없습니다.')
     return
   }
-  if (currentUser) {
-    try {
-      if (!isInCart) await addUserCartItem(currentUser.uid, product, 1)
-      setIsInCart(true)
-      navigate('/cart')
-    } catch (error) {
-      console.error('장바구니를 저장하지 못했습니다.', error)
-      window.alert(
-        error?.code === 'permission-denied' || error?.code === 'firestore/permission-denied'
-          ? '장바구니 저장 권한이 없습니다. Firestore 보안 규칙을 확인해 주세요.'
-          : error?.message || '바로구매를 진행하지 못했습니다.',
-      )
-    }
-    return
+  navigate('/pay', { state: { items: [{ ...product, quantity: 1 }] } })
   }
-
-  const cart = loadLocal('cart', [])
-  const isAlreadyInCart = cart.some(
-    (item) => String(item.id) === String(product.id),
-  )
-
-  const nextCart = isAlreadyInCart
-    ? cart
-    : [...cart, { ...product, price: disPrice, quantity: 1 }]
-
-  saveLocal('cart', nextCart)
-  setIsInCart(true)
-  navigate('/cart')
-}
    /*
    const newisLike=isLike
    //같은 상품이 없으므로 찜한 상품을 찜목록에 추가한다
