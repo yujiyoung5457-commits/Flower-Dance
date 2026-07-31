@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import EmptyMessage from '../components/EmptyMessage'
+import { Link } from 'react-router-dom'
 import ProductList from '../components/ProductList'
 import {loadLocal, saveLocal} from '../utils/localStorage'
 import styles from './Wishlist.module.scss'
@@ -64,8 +64,14 @@ const Wishlist = () => {
       {
         latestWishItems.length===0 ?
         (
-          <EmptyMessage image='/img/empty.png' title='찜한 상품이 없습니다'
-           des='관심있는 상품을 찜해보세요' link='/products' linkText='찜하러 가기'/>
+          <div className={styles.emptyWishlist}>
+            <div className={styles.emptyText}>
+              <h3>리스트가 비었습니다!</h3>
+              <p>찜한 상품이 없어요<br />관심있는 상품을 찜해보세요</p>
+              <Link to='/products'>찜하러가기</Link>
+            </div>
+            <img src='/img/cotti-plush01.png' alt='빈 찜 목록을 안내하는 코티 인형' />
+          </div>
         ):(
           <ProductList products={latestWishItems} onWishItem={changeWish} />
         )

@@ -14,3 +14,71 @@
     font-size: 3.5rem;
   }
 }
+
+.emptyWishlist {
+  display: grid;
+  width: min(820px, calc(100% - 2rem));
+  margin: -1rem auto 8rem;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 1.15fr);
+  align-items: center;
+  gap: 3rem;
+}
+
+.emptyText {
+  text-align: center;
+
+  h3 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 500;
+  }
+
+  p {
+    margin: 0 0 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  a {
+    display: inline-flex;
+    min-width: 8.5rem;
+    min-height: 3.2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.25rem;
+    border-radius: 1rem;
+    background: #c77d7d;
+    color: #fff;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.2s;
+
+    &:hover {
+      background: #ad6868;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.emptyWishlist > img {
+  display: block;
+  width: min(100%, 22rem);
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+@media (max-width: 700px) {
+  .box {
+    margin: 3rem auto;
+  }
+
+  .emptyWishlist {
+    margin: 0 auto 5rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .emptyWishlist > img {
+    width: min(80%, 18rem);
+  }
+}
