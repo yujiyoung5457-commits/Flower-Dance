@@ -8,7 +8,7 @@ import {
   updateProductRecommendation,
   updateProductStock,
 } from '../firebase/productApi'
-import { uploadProductImage } from '../firebase/storageApi'
+import { encodeProductImage } from '../firebase/storageApi'
 import styles from './AdminProductManager.module.scss'
 
 const PAGE_SIZE = 10
@@ -23,6 +23,7 @@ const koreanError = (error, action) => {
     return `${action} 권한이 없습니다. 관리자 계정과 Firestore 보안 규칙을 확인해 주세요.`
   }
   if (error?.code === 'product/invalid-stock') return error.message
+  if (error?.code === 'product/image-too-large') return error.message
   return `${action} 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.`
 }
 
@@ -96,7 +97,7 @@ const AdminProductManager = () => {
     }
     setBusy(true); setError(''); setMessage('')
     try {
-      const image = selectedImage ? await uploadProductImage(selectedImage) : form.image
+      const image = selectedImage ? await encodeProductImage(selectedImage) : form.image
       await saveProduct({ ...form, image }, editingId || undefined)
       setMessage(editingId ? '상품을 수정했습니다.' : '상품을 등록했습니다.')
       resetForm(); setSelectedImage(null)

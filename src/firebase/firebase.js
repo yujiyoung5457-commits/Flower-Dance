@@ -1,7 +1,6 @@
 import { getApp, getApps, initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
-import { getStorage } from 'firebase/storage'
 
 // 실제 값은 .env 파일에만 작성하고, Vite에서는 import.meta.env로 읽습니다.
 const firebaseConfig = {
@@ -37,6 +36,5 @@ const app = isFirebaseConfigured
 
 const auth = app ? getAuth(app) : null
 const db = app ? getFirestore(app) : null
-const storage = app ? getStorage(app) : null
 
-export { app, auth, db, isFirebaseConfigured, missingFirebaseEnvironmentKeys, storage }
+export { app, auth, db, isFirebaseConfigured, missingFirebaseEnvironmentKeys }
