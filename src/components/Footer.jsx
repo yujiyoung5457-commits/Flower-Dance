@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from './Footer.module.scss'
 
 const Footer = () => {
@@ -36,6 +37,5 @@ const Footer = () => {
 }
 
 export default Footer
-
 
 
