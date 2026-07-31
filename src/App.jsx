@@ -25,6 +25,7 @@ import AdminMembers from './pages/AdminMembers'
 import AdminProducts from './pages/AdminProductManager'
 import AdminRecommended from './pages/AdminRecommended'
 import AdminNotices from './pages/AdminNotices'
+import LoadMap from './pages/LoadMap'
 import useAuthStore from './store/authStore'
 
 const App = () => {
@@ -76,6 +77,7 @@ const App = () => {
         <Route path='/admin/notices' element={<AdminRoute><AdminNotices /></AdminRoute>} />
         <Route path='/notice' element={<Notice />} />
         <Route path='/notice/:id' element={<NoticeDetail />} />
+        <Route path='/loadmap' element={<LoadMap />} />
         <Route path='/products' element={<Products />} />
         <Route path='/products/:id' element={<ProductDetail />} />
         <Route path='/products/category/:category' element={<Products />} />

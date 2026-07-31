@@ -123,6 +123,7 @@ const Header = () => {
           <Link to='/products/category/bedding'>침구류</Link>
           <Link to='/products/category/toy'>장난감</Link>
           <Link to='/notice'>공지사항</Link>
+          <Link to='/loadmap'>오시는 길</Link>
         </nav>
 
         {isMobileMenuOpen && (
@@ -135,6 +136,7 @@ const Header = () => {
             <Link to='/products/category/bedding' onClick={closeMobileMenu}>침구류</Link>
             <Link to='/products/category/toy' onClick={closeMobileMenu}>장난감</Link>
             <Link to='/notice' onClick={closeMobileMenu}>공지사항</Link>
+            <Link to='/loadmap' onClick={closeMobileMenu}>오시는 길</Link>
             <Link to='/mypage' onClick={closeMobileMenu}>MyPage</Link>
             {isAdmin && <Link to='/admin' onClick={closeMobileMenu}>Admin</Link>}
             {currentUser ? (
