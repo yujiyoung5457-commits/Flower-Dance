@@ -113,19 +113,35 @@
 
   .categoryList {
     width: 100%;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem 1rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem 0.5rem;
   }
 
   .categoryList a {
     min-width: 0;
   }
 
+  .categoryList span,
+  .categoryList img {
+    width: min(18vw, 4.5rem);
+    height: min(18vw, 4.5rem);
+  }
+
   .categoryList strong {
-    font-size: 0.9rem;
+    font-size: clamp(0.68rem, 3vw, 0.85rem);
+    text-align: center;
   }
 
   .titleArea h2 {
     font-size: 1rem;
+  }
+
+  .revealFromRight {
+    transform: translateY(3.5rem);
+    transition: opacity 0.85s ease, transform 0.85s ease;
+  }
+
+  .revealFromRight.revealed {
+    transform: translateY(0);
   }
 }
