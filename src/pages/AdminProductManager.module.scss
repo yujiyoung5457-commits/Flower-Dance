@@ -14,7 +14,7 @@
 .form h2, .full, .check, .formActions { grid-column: 1 / -1; }
 .form h2 { margin: 0; }
 .form label { display: grid; gap: .4rem; color: #786b61; }
-.form input, .form textarea { width: 100%; min-width: 0; padding: .75rem; border: 1px solid #ded4cb; border-radius: .6rem; background: #fff; font: inherit; }
+.form input, .form select, .form textarea { width: 100%; min-width: 0; padding: .75rem; border: 1px solid #ded4cb; border-radius: .6rem; background: #fff; font: inherit; }
 .fileHint { color: #8a7c70; font-size: .85rem; }
 .form textarea { min-height: 7rem; resize: vertical; }
 .check { display: flex !important; align-items: center; grid-template-columns: auto 1fr; }

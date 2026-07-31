@@ -204,7 +204,7 @@ const ProductDetail = () => {
             {product.stock != null && <small>재고 {product.stock}개</small>}
           </div>
             <div className={styles.finalPrice}>
-              <h2>총 상품금액: <strong>{totalPrice.toLocaleString()}</strong></h2>
+              <h2>총 상품금액: <strong>{totalPrice.toLocaleString()}원</strong></h2>
               <div className={styles.btnLast}>
                 <button onClick={changeWish}>
                   {

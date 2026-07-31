@@ -13,6 +13,14 @@ import styles from './AdminProductManager.module.scss'
 
 const PAGE_SIZE = 10
 const MAX_RECOMMENDED_PRODUCTS = 400
+const PRODUCT_CATEGORIES = [
+  { label: '식기/주방', value: 'kitchen' },
+  { label: '의류/신발', value: 'clothes' },
+  { label: '인형', value: 'doll' },
+  { label: '이유식', value: 'baby-food' },
+  { label: '침구류', value: 'bedding' },
+  { label: '장난감', value: 'toy' },
+]
 const EMPTY_FORM = {
   name: '', category: '', categoryValue: '', price: '', discountRate: '0',
   stock: '0', lowStockThreshold: '5', image: '', description: '', isRecommended: false,
@@ -74,6 +82,15 @@ const AdminProductManager = () => {
     const { name, value, checked, type } = target
     if ((name === 'stock' || name === 'lowStockThreshold') && value !== '' && !/^\d+$/.test(value)) return
     setForm((previous) => ({ ...previous, [name]: type === 'checkbox' ? checked : value }))
+  }
+
+  const selectCategory = ({ target }) => {
+    const selected = PRODUCT_CATEGORIES.find((item) => item.label === target.value)
+    setForm((previous) => ({
+      ...previous,
+      category: target.value,
+      categoryValue: selected?.value || '',
+    }))
   }
 
   const resetForm = () => { setForm(EMPTY_FORM); setEditingId(''); setSelectedImage(null) }
@@ -195,8 +212,13 @@ const AdminProductManager = () => {
           <form className={styles.form} onSubmit={submitProduct}>
             <h2>{editingId ? '상품 수정' : '상품 등록'}</h2>
             <label>상품명<input name='name' value={form.name} onChange={updateField} required /></label>
-            <label>카테고리<input name='category' value={form.category} onChange={updateField} required /></label>
-            <label>카테고리 값(value)<input name='categoryValue' value={form.categoryValue} onChange={updateField} required /></label>
+            <label>카테고리
+              <select name='category' value={form.category} onChange={selectCategory} required>
+                <option value='' disabled>카테고리를 선택해 주세요</option>
+                {PRODUCT_CATEGORIES.map((item) => <option key={item.value} value={item.label}>{item.label}</option>)}
+              </select>
+            </label>
+            <label>카테고리 값(value)<input name='categoryValue' value={form.categoryValue} readOnly /></label>
             <label>가격<input name='price' type='number' min='0' value={form.price} onChange={updateField} required /></label>
             <label>할인률<input name='discountRate' type='number' min='0' max='100' value={form.discountRate} onChange={updateField} /></label>
             <label>재고<input name='stock' type='number' min='0' step='1' value={form.stock} onChange={updateField} required /></label>
